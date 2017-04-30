@@ -1,0 +1,4 @@
+*.sw*
+index.js
+node_modules/
+lib/
