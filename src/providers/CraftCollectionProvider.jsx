@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { ParseEndpoint } from '../EndpointParser';
 import { fetchCollection } from '../actions/craftActions';
 
-class CraftCollection extends Component {
+class CraftCollectionProvider extends Component {
 
   componentWillMount() {
     this.refreshComponent();
@@ -42,7 +42,7 @@ class CraftCollection extends Component {
 
 }
 
-CraftCollection.propTypes = {
+CraftCollectionProvider.propTypes = {
   getComponents: PropTypes.func.isRequired,
   collectionUrl: PropTypes.string.isRequired,
   collection: PropTypes.array,
@@ -63,4 +63,4 @@ const mapDispatchToProps = dispatch => ({
   getComponents: uri => dispatch(fetchCollection(uri)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CraftCollection);
+export default connect(mapStateToProps, mapDispatchToProps)(CraftCollectionProvider);

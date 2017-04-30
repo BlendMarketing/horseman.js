@@ -11,7 +11,7 @@ import { fetchEntry } from '../actions/craftActions';
  * in the craftcms backend. The data returned will be stored in the "entry"
  * prop of the child component.
  */
-class CraftEntry extends Component {
+class CraftEntryProvider extends Component {
 
   componentWillMount() {
     this.refreshComponent();
@@ -45,7 +45,7 @@ class CraftEntry extends Component {
   }
 }
 
-CraftEntry.propTypes = {
+CraftEntryProvider.propTypes = {
   /**
    * The method call that will be responsible for fetching the entry data and
    * adding the information to the store.
@@ -89,4 +89,4 @@ const mapDispatchToProps = dispatch => ({
   getEntry: uri => dispatch(fetchEntry(uri)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CraftEntry);
+export default connect(mapStateToProps, mapDispatchToProps)(CraftEntryProvider);
