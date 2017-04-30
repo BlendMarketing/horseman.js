@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Children } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -31,7 +31,7 @@ class CraftEntry extends Component {
   }
 
   render() {
-    const { entry } = this.props;
+    const { entry, children } = this.props;
 
     if (entry.error) {
       return <Redirect to="/404" />;
@@ -41,11 +41,8 @@ class CraftEntry extends Component {
       return <h2>Loading</h2>;
     }
 
-    const RenderedComponent = this.props.component;
-
-    return <RenderedComponent entry={entry} />;
+    return <div>{Children.map(children, child => React.cloneElement(child, { entry }))}</div>;
   }
-
 }
 
 CraftEntry.propTypes = {
@@ -65,11 +62,11 @@ CraftEntry.propTypes = {
    */
   entry: PropTypes.object.isRequired,
 
+
   /**
-   * The component to render with the entry prop once the data is returned from
-   * the endpoint.
+   * React components to be rendered after data is fetched.
    */
-  component: PropTypes.func.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 /**
@@ -81,7 +78,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     entryUrl,
-    entry: state.entries[entryUrl] || { loading: true },
+    entry: state.horsemanEntries[entryUrl] || { loading: true },
   };
 };
 

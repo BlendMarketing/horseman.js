@@ -10,7 +10,7 @@ export const fetchEntry = endpoint => ({
   [RSAA]: {
     endpoint,
     method: 'GET',
-    bailout: state => typeof state.entries[endpoint] !== 'undefined',
+    bailout: state => typeof state.horsemanEntries[endpoint] !== 'undefined',
     types: [
       { type: '@@horseman/FETCH_ENTRY_REQUEST', meta: { endpoint } },
       { type: '@@horseman/ADD_CRAFT_ENTRY', meta: { endpoint } },
@@ -20,7 +20,7 @@ export const fetchEntry = endpoint => ({
 });
 
 /**
- * Fetch multiple entries from a singular element api endpoint.
+ * Fetch multiple horsemanEntries from a singular element api endpoint.
  *
  * @param endpoint {string} The endpoint where the resources are located.
  */
@@ -28,10 +28,11 @@ export const fetchCollection = endpoint => ({
   [RSAA]: {
     endpoint,
     method: 'GET',
+    bailout: state => typeof state.horsemanCollections[endpoint] !== 'undefined',
     types: [
-      { type: '@@horseman/FETCH_ENTRIES_REQUEST', meta: { endpoint } },
-      { type: '@@horseman/ADD_CRAFT_ENTRIES', meta: { endpoint } },
-      { type: '@@horseman/FETCH_ENTRIES_FAIL', meta: { endpoint } },
+      { type: '@@horseman/FETCH_COLLECTION_REQUEST', meta: { endpoint } },
+      { type: '@@horseman/ADD_CRAFT_COLLECTION', meta: { endpoint } },
+      { type: '@@horseman/FETCH_COLLECTION_FAIL', meta: { endpoint } },
     ],
   },
 });
