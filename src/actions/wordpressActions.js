@@ -31,7 +31,7 @@ export const fetchCollection = endpoint => ({
     bailout: state => typeof state.horsemanCollections[endpoint] !== 'undefined',
     types: [
       { type: '@@horseman/FETCH_COLLECTION_REQUEST', meta: { endpoint } },
-      { type: '@@horseman/ADD_CRAFT_COLLECTION', meta: { endpoint } },
+      { type: '@@horseman/ADD_WORDPRESS_COLLECTION', meta: { endpoint } },
       { type: '@@horseman/FETCH_COLLECTION_FAIL', meta: { endpoint } },
     ],
   },

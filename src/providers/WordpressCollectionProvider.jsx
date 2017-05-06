@@ -1,4 +1,4 @@
-import React, { Post } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -7,40 +7,40 @@ import { ParseEndpoint } from '../EndpointParser';
 import { fetchCollection } from '../actions/wordpressActions';
 
 /**
- * The WordpressCollectionProvider enables all children posts to access a
+ * The CraftCollectionProvider enables all children components to access a
  * `collection` prop parameter that is composed of data from the endpoint
  * specified on the `endpoint` prop of this provider.
  */
-class WordpressCollectionProvider extends Post {
+class WordpressCollectionProvider extends Component {
 
-  postWillMount() {
-    this.refreshPost();
+  componentWillMount() {
+    this.refreshComponent();
   }
 
-  postWillUpdate() {
-    this.refreshPost();
+  componentWillUpdate() {
+    this.refreshComponent();
   }
 
   /**
-   * When the post is refreshed we check the entry to be sure we have the
+   * When the component is refreshed we check the entry to be sure we have the
    * latest data to paint the DOM
    */
-  refreshPost() {
-    const { getPosts, collectionUrl } = this.props;
+  refreshComponent() {
+    const { getComponents, collectionUrl } = this.props;
 
-    getPosts(collectionUrl);
+    getComponents(collectionUrl);
   }
 
   render() {
     const { collection, render } = this.props;
-    const loadingPost = this.props.loadingPost || null;
+    const loadingComponent = this.props.loadingComponent || null;
 
     if (collection.error) {
       return <Redirect to="/404" />;
     }
 
     if (collection.loading) {
-      return loadingPost;
+      return loadingComponent;
     }
 
     return render(collection);
@@ -58,9 +58,9 @@ WordpressCollectionProvider.propTypes = {
   /* eslint-enable react/no-unused-prop-types */
 
   /**
-   * This prop will fetch the post from the endpoint.
+   * This prop will fetch the component from the endpoint.
    */
-  getPosts: PropTypes.func.isRequired,
+  getComponents: PropTypes.func.isRequired,
 
   /**
    * The endpoint where we can find the resources located.
@@ -82,9 +82,9 @@ WordpressCollectionProvider.propTypes = {
   }).isRequired,
 
   /**
-   * The post to render while the data is being fetched.
+   * The component to render while the data is being fetched.
    */
-  loadingPost: PropTypes.element,
+  loadingComponent: PropTypes.element,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -98,7 +98,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getPosts: uri => dispatch(fetchCollection(uri)),
+  getComponents: uri => dispatch(fetchCollection(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WordpressCollectionProvider);
