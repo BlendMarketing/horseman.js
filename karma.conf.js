@@ -6,10 +6,10 @@ module.exports = function (config) {
         browsers: ['PhantomJS'],
         frameworks: ['mocha'],
         files: [
-            {pattern: '__tests__/*-test.js*', watched: false, included: true, served: true}
+            {pattern: 'src/__tests__/*-test.js*', watched: false, included: true, served: true}
         ],
         preprocessors: {
-            '__tests__/*-test.js*': ['babel']
+            'src/__tests__/*-test.js*': ['babel']
         },
         reporters: ['dots'],
         babelPreprocessor: {

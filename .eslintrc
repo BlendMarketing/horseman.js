@@ -9,5 +9,6 @@
     "global-require": off,
     "react/require-default-props": off,
     "react/forbid-prop-types": off,
+    "react/jsx-max-props-per-line": 2,
   }
 }
