@@ -12,11 +12,13 @@ import Reducers from './reducers/index';
 
 const Actions = {
   craftActions,
+  wordpressActions,
 };
 
 export {
   CraftEntryProvider,
   CraftCollectionProvider,
+  WordpressCollectionProvider,
   RichText,
   Reducers,
   Actions,
