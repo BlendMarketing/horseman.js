@@ -31,8 +31,7 @@ class CraftEntryProvider extends Component {
   }
 
   render() {
-    const { entry } = this.props;
-    const ChildComponent = this.props.component;
+    const { entry, render } = this.props;
 
     if (entry.error) {
       return <Redirect to="/404" />;
@@ -42,7 +41,7 @@ class CraftEntryProvider extends Component {
       return <h2>Loading</h2>;
     }
 
-    return <ChildComponent entry={entry} />;
+    return render(entry);
   }
 }
 
@@ -65,9 +64,9 @@ CraftEntryProvider.propTypes = {
 
 
   /**
-   * React component to be rendered after data is fetched.
+   * Func to be rendered once the entry comes back
    */
-  component: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
 };
 
 /**

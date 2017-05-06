@@ -32,9 +32,8 @@ class CraftCollectionProvider extends Component {
   }
 
   render() {
-    const { collection } = this.props;
+    const { collection, render } = this.props;
     const loadingComponent = this.props.loadingComponent || null;
-    const ChildComponent = this.props.component;
 
     if (collection.error) {
       return <Redirect to="/404" />;
@@ -44,7 +43,7 @@ class CraftCollectionProvider extends Component {
       return loadingComponent;
     }
 
-    return <ChildComponent collection={collection} />;
+    return render(collection);
   }
 
 }
@@ -69,9 +68,9 @@ CraftCollectionProvider.propTypes = {
   collectionUrl: PropTypes.string.isRequired,
 
   /**
-   * What should be rendered once the resource comes back.
+   * The callback that will be rendered when the collection comes back
    */
-  component: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
 
   /**
    * The collection of items that will available to all children.
