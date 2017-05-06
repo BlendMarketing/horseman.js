@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -32,8 +32,9 @@ class CraftCollectionProvider extends Component {
   }
 
   render() {
-    const { collection, children } = this.props;
+    const { collection } = this.props;
     const loadingComponent = this.props.loadingComponent || null;
+    const ChildComponent = this.props.component;
 
     if (collection.error) {
       return <Redirect to="/404" />;
@@ -43,7 +44,7 @@ class CraftCollectionProvider extends Component {
       return loadingComponent;
     }
 
-    return <div>{Children.map(children, child => React.cloneElement(child, { collection }))}</div>;
+    return <ChildComponent collection={collection} />;
   }
 
 }
@@ -70,7 +71,7 @@ CraftCollectionProvider.propTypes = {
   /**
    * What should be rendered once the resource comes back.
    */
-  children: PropTypes.any.isRequired,
+  component: PropTypes.func.isRequired,
 
   /**
    * The collection of items that will available to all children.

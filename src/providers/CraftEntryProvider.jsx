@@ -1,4 +1,4 @@
-import React, { Component, Children } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -31,7 +31,8 @@ class CraftEntryProvider extends Component {
   }
 
   render() {
-    const { entry, children } = this.props;
+    const { entry } = this.props;
+    const ChildComponent = this.props.component;
 
     if (entry.error) {
       return <Redirect to="/404" />;
@@ -41,7 +42,7 @@ class CraftEntryProvider extends Component {
       return <h2>Loading</h2>;
     }
 
-    return <div>{Children.map(children, child => React.cloneElement(child, { entry }))}</div>;
+    return <ChildComponent entry={entry} />;
   }
 }
 
@@ -64,9 +65,9 @@ CraftEntryProvider.propTypes = {
 
 
   /**
-   * React components to be rendered after data is fetched.
+   * React component to be rendered after data is fetched.
    */
-  children: PropTypes.any.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 /**
