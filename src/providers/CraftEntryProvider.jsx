@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { ParseEndpoint } from '../EndpointParser';
-import { fetchEntry } from '../actions/craftActions';
+import { fetchEntryFactory } from '../ActionFactory';
 
 /**
  * Responsibe for managing a component that will be rendered using data stored
@@ -86,7 +86,7 @@ const mapStateToProps = (state, ownProps) => {
  * The component needs to be able to fetch the entry we want.
  */
 const mapDispatchToProps = dispatch => ({
-  getEntry: uri => dispatch(fetchEntry(uri)),
+  getEntry: uri => dispatch(fetchEntryFactory('@@horseman/ADD_CRAFT_ENTRY')(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CraftEntryProvider);

@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { ParseEndpoint } from '../EndpointParser';
-import { fetchCollection } from '../actions/craftActions';
+import { fetchCollectionFactory } from '../ActionFactory';
 
 /**
  * The CraftCollectionProvider enables all children components to access a
  * `collection` prop parameter that is composed of data from the endpoint
  * specified on the `endpoint` prop of this provider.
+ *
+ * @author Jared Meyering <jared.meyering@gmail.com>
  */
 class CraftCollectionProvider extends Component {
 
@@ -96,9 +98,8 @@ const mapStateToProps = (state, ownProps) => {
     collection: collections[collectionUrl] || { loading: true, data: [] },
   };
 };
-
 const mapDispatchToProps = dispatch => ({
-  getComponents: uri => dispatch(fetchCollection(uri)),
+  getComponents: uri => dispatch(fetchCollectionFactory('@@horseman/ADD_ARRAY_COLLECTION')(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CraftCollectionProvider);

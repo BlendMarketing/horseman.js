@@ -3,18 +3,12 @@ const path = require('path');
 
 module.exports = {
   cache: true,
-  externals: {
-    cheerio: 'window',
-    'react/addons': 'react',
-    'react/lib/ExecutionEnvironment': 'react',
-    'react/lib/ReactContext': 'react',
-  },
   entry: {
     app: [
       path.join(__dirname, 'src/index.js'),
     ],
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -32,13 +26,19 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false,
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.ProvidePlugin({
+      Promise: 'es6-promise',
     }),
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'umd',
     filename: 'index.js',
   },
 };

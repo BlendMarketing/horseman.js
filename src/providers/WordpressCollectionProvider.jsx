@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { ParseEndpoint } from '../EndpointParser';
-import { fetchCollection } from '../actions/wordpressActions';
+import { fetchCollectionFactory } from 'ActionFactory';
 
 /**
  * The CraftCollectionProvider enables all children components to access a
@@ -98,7 +98,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getComponents: uri => dispatch(fetchCollection(uri)),
+  getComponents: uri => dispatch(fetchCollectionFactory('@@horseman/ADD_ARRAY_COLLECTION')(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WordpressCollectionProvider);

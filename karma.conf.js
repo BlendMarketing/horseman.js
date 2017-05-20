@@ -9,13 +9,20 @@ module.exports = function (config) {
         browsers: ['PhantomJS'],
         frameworks: ['mocha'],
         files: [
-            {pattern: './src/**/*-test.js*', watched: false, included: true, served: true}
+            {pattern: './src/**/*.spec.js', watched: false, included: true, served: true}
         ],
         preprocessors: {
-            './src/**/*-test.js*': ['webpack']
+            './src/**/*.spec.js': ['webpack']
         },
         reporters: ['dots'],
-        webpack: webpackConfig,
+        webpack: Object.assign(webpackConfig, {
+          externals: {
+            cheerio: 'window',
+            'react/addons': 'react',
+            'react/lib/ExecutionEnvironment': 'react',
+            'react/lib/ReactContext': 'react',
+          },
+        }),
         webpackMiddleware: {
             stats: 'errors-only'
         },

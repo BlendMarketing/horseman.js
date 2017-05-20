@@ -6,7 +6,7 @@ export default function collections(state = initialState, action) {
       return { ...state, [action.meta.endpoint]: { error: false, loading: true, data: [] } };
     }
 
-    case '@@horseman/ADD_CRAFT_COLLECTION': {
+    case '@@horseman/ADD_ARRAY_COLLECTION': {
       return {
         ...state,
         [action.meta.endpoint]: {
