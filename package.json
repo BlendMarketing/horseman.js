@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha-webpack --webpack-config webpack.config.js \"src/__tests__/*.spec.js\"",
+    "test": "karma start --single-run",
     "build": "webpack"
   },
   "dependencies": {
