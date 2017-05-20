@@ -8,7 +8,6 @@ jobs:
       - checkout
       - restore_cache:
           key: node_modules-{{ .Branch }}-{{ checksum "package.json" }}
-      - run: npm install -g yarn
       - run: yarn install
       - save_cache:
           key: node_modules-{{ .Branch }}-{{ checksum "package.json" }}
