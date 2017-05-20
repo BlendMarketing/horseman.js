@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "karma start --single-run",
+    "lint": "eslint ./src",
     "build": "webpack"
   },
   "dependencies": {
