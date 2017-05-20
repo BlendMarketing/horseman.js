@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { ParseEndpoint } from '../EndpointParser';
+import ParseEndpoint from '../ParseEndpoint';
 import { fetchEntryFactory } from '../ActionFactory';
 
 /**

@@ -6,8 +6,7 @@
  * @param options {object} The key: value pairs that will be templated into the
  *        endpoint.
  */
-export const ParseEndpoint = (endpoint, options) => {
-
+const ParseEndpoint = (endpoint, options) => {
   const params = endpoint.match(/:[a-z0-9]+/g);
   let parsedEndpoint = endpoint;
 
@@ -22,3 +21,5 @@ export const ParseEndpoint = (endpoint, options) => {
 
   return parsedEndpoint;
 };
+
+export default ParseEndpoint;
