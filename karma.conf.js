@@ -14,7 +14,7 @@ module.exports = function (config) {
         preprocessors: {
             './src/**/*.spec.js': ['webpack']
         },
-        reporters: ['dots'],
+        reporters: ['mocha'],
         webpack: Object.assign(webpackConfig, {
           externals: {
             cheerio: 'window',
