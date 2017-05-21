@@ -11,6 +11,20 @@ import CollectionProvider from '../../providers/CollectionProvider';
 import Loading from '../../components/Loading';
 
 describe('CollectionProvider', () => {
+  it('it should attempt to fetch the resource', () => {
+    const fetchFunc = sinon.spy();
+    shallow(
+      <CollectionProvider
+        getCollection={fetchFunc}
+        collectionUrl="/foo"
+        collection={{ loading: true, data: [] }}
+        render={() => (<div><h1>loaded</h1></div>)}
+      />,
+    );
+    expect(fetchFunc).to.have.property('callCount', 1);
+    expect(fetchFunc.args[0][0]).to.equal('/foo');
+  });
+
   it('Should render the loading component if the entry is loading', () => {
     const fetchFunc = sinon.spy();
     const wrapper = shallow(

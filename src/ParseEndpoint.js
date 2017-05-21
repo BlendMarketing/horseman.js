@@ -16,7 +16,7 @@ const ParseEndpoint = (endpoint, options) => {
 
   params.forEach((param) => {
     const cleanParam = param.replace(':', '');
-    parsedEndpoint = parsedEndpoint.replace(param, options[cleanParam]);
+    parsedEndpoint = parsedEndpoint.replace(param, (options[cleanParam] || ''));
   });
 
   return parsedEndpoint;
