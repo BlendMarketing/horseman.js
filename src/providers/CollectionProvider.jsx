@@ -26,9 +26,9 @@ class CollectionProvider extends Component {
    * latest data to paint the DOM
    */
   refreshComponent() {
-    const { getComponents, collectionUrl } = this.props;
+    const { getCollection, collectionUrl } = this.props;
 
-    getComponents(collectionUrl);
+    getCollection(collectionUrl);
   }
 
   render() {
@@ -49,18 +49,10 @@ class CollectionProvider extends Component {
 }
 
 CollectionProvider.propTypes = {
-  /* eslint-disable react/no-unused-prop-types */
-  /**
-   * The endpoint is the templated resource location that we will use to find
-   * the collection data to populate the children of this provider.
-   */
-  endpoint: PropTypes.string.isRequired,
-  /* eslint-enable react/no-unused-prop-types */
-
   /**
    * This prop will fetch the component from the endpoint.
    */
-  getComponents: PropTypes.func.isRequired,
+  getCollection: PropTypes.func.isRequired,
 
   /**
    * The endpoint where we can find the resources located.
