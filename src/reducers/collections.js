@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {};
 
-export default function collections(state = initialState, action) {
+const collections = (state = initialState, action) => {
   switch (action.type) {
     case types.COLLECTION_REQUEST: {
       return { ...state, [action.meta.endpoint]: { error: false, loading: true, data: [] } };
@@ -27,4 +27,6 @@ export default function collections(state = initialState, action) {
       return state;
     }
   }
-}
+};
+
+export default collections;
