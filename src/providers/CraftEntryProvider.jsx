@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EntryProvider from './EntryProvider';
 import ParseEndpoint from '../ParseEndpoint';
 import { fetchEntryFactory } from '../ActionFactory';
+import * as types from '../constants/ActionTypes';
 
 /**
  * A Craft entry needs to have access to the information about the entry it is
@@ -21,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
  * The component needs to be able to fetch the entry we want.
  */
 const mapDispatchToProps = dispatch => ({
-  getEntry: uri => dispatch(fetchEntryFactory('@@horseman/ADD_CRAFT_ENTRY')(uri)),
+  getEntry: uri => dispatch(fetchEntryFactory(types.ADD_CRAFT_ENTRY)(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EntryProvider);

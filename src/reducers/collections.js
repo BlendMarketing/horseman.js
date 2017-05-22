@@ -1,12 +1,14 @@
+import * as types from '../constants/ActionTypes';
+
 const initialState = {};
 
 export default function collections(state = initialState, action) {
   switch (action.type) {
-    case '@@horseman/FETCH_COLLECTION_REQUEST': {
+    case types.COLLECTION_REQUEST: {
       return { ...state, [action.meta.endpoint]: { error: false, loading: true, data: [] } };
     }
 
-    case '@@horseman/ADD_ARRAY_COLLECTION': {
+    case types.ADD_ARRAY_COLLECTION: {
       return {
         ...state,
         [action.meta.endpoint]: {
@@ -17,7 +19,7 @@ export default function collections(state = initialState, action) {
       };
     }
 
-    case '@@horseman/FETCH_COLLECTION_FAIL': {
+    case types.COLLECTION_FAIL: {
       return { ...state, [action.meta.endpoint]: { error: true, loading: false, data: [] } };
     }
 

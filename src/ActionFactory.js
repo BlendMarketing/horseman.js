@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import * as types from './constants/ActionTypes';
 
 /**
  * Fetch a singular endpoint from an api and dispatches actions depending on
@@ -14,7 +15,7 @@ export const fetchEntryFactory = successAction => endpoint => (dispatch, getStat
     return null;
   }
 
-  dispatch({ type: '@@horseman/FETCH_ENTRY_REQUEST', meta: { endpoint } });
+  dispatch({ type: types.ENTRY_REQUEST, meta: { endpoint } });
 
   return fetch(endpoint)
   .then(
@@ -22,12 +23,12 @@ export const fetchEntryFactory = successAction => endpoint => (dispatch, getStat
       if (response.ok) {
         return response.json()
           .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }))
-          .catch(() => dispatch({ type: '@@horseman/BAD_JSON', meta: { endpoint } }));
+          .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
-      return dispatch({ type: '@@horseman/FETCH_ENTRY_FAIL', meta: { endpoint } });
+      return dispatch({ type: types.ENTRY_FAIL, meta: { endpoint } });
     },
   )
-  .catch(e => dispatch({ type: '@@horseman/BAD_REQUEST', meta: { endpoint } }));
+  .catch(() => dispatch({ type: types.BAD_REQUEST, meta: { endpoint } }));
 };
 
 /**
@@ -43,7 +44,7 @@ export const fetchCollectionFactory = successAction => endpoint => (dispatch, ge
     return null;
   }
 
-  dispatch({ type: '@@horseman/FETCH_COLLECTION_REQUEST', meta: { endpoint } });
+  dispatch({ type: types.COLLECTION_REQUEST, meta: { endpoint } });
 
   return fetch(endpoint)
   .then(
@@ -51,10 +52,10 @@ export const fetchCollectionFactory = successAction => endpoint => (dispatch, ge
       if (response.ok) {
         return response.json()
         .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }))
-        .catch(() => dispatch({ type: '@@horseman/BAD_JSON', meta: { endpoint } }));
+        .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
-      return dispatch({ type: '@@horseman/FETCH_COLLECTION_FAIL', meta: { endpoint } });
+      return dispatch({ type: types.COLLECTION_FAIL, meta: { endpoint } });
     },
   )
-  .catch(() => dispatch({ type: '@@horseman/BAD_REQUEST', meta: { endpoint } }));
+  .catch(() => dispatch({ type: types.BAD_REQUEST, meta: { endpoint } }));
 };

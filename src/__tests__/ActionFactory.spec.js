@@ -7,6 +7,8 @@ import MockFetch from 'mock-fetch-api';
 
 import { fetchEntryFactory, fetchCollectionFactory } from '../ActionFactory';
 
+import * as types from '../constants/ActionTypes';
+
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
@@ -16,7 +18,7 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanEntries: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_ENTRY_REQUEST',
+          type: types.ENTRY_REQUEST,
           meta: {
             endpoint: '/endpoint',
           },
@@ -48,13 +50,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanEntries: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_ENTRY_REQUEST',
+          type: types.ENTRY_REQUEST,
           meta: {
             endpoint: '/bad',
           },
         },
         {
-          type: '@@horseman/FETCH_ENTRY_FAIL',
+          type: types.ENTRY_FAIL,
           meta: {
             endpoint: '/bad',
           },
@@ -77,13 +79,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanEntries: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_ENTRY_REQUEST',
+          type: types.ENTRY_REQUEST,
           meta: {
             endpoint: '/badjson',
           },
         },
         {
-          type: '@@horseman/BAD_JSON',
+          type: types.BAD_JSON,
           meta: {
             endpoint: '/badjson',
           },
@@ -106,13 +108,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanEntries: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_ENTRY_REQUEST',
+          type: types.ENTRY_REQUEST,
           meta: {
             endpoint: '/badrequest',
           },
         },
         {
-          type: '@@horseman/BAD_REQUEST',
+          type: types.BAD_REQUEST,
           meta: {
             endpoint: '/badrequest',
           },
@@ -137,7 +139,7 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanCollections: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_COLLECTION_REQUEST',
+          type: types.COLLECTION_REQUEST,
           meta: {
             endpoint: '/collectionendpoint',
           },
@@ -171,13 +173,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanCollections: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_COLLECTION_REQUEST',
+          type: types.COLLECTION_REQUEST,
           meta: {
             endpoint: '/bad',
           },
         },
         {
-          type: '@@horseman/FETCH_COLLECTION_FAIL',
+          type: types.COLLECTION_FAIL,
           meta: {
             endpoint: '/bad',
           },
@@ -198,13 +200,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanCollections: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_COLLECTION_REQUEST',
+          type: types.COLLECTION_REQUEST,
           meta: {
             endpoint: '/badjson',
           },
         },
         {
-          type: '@@horseman/BAD_JSON',
+          type: types.BAD_JSON,
           meta: {
             endpoint: '/badjson',
           },
@@ -225,13 +227,13 @@ describe('fetchEntryFactory', () => {
       const store = mockStore({ horsemanCollections: {} });
       const actions = [
         {
-          type: '@@horseman/FETCH_COLLECTION_REQUEST',
+          type: types.COLLECTION_REQUEST,
           meta: {
             endpoint: '/badrequest',
           },
         },
         {
-          type: '@@horseman/BAD_REQUEST',
+          type: types.BAD_REQUEST,
           meta: {
             endpoint: '/badrequest',
           },
