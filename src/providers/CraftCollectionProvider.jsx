@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getComponents: uri => dispatch(fetchCollectionFactory('@@horseman/ADD_ARRAY_COLLECTION')(uri)),
+  getCollection: uri => dispatch(fetchCollectionFactory('@@horseman/ADD_ARRAY_COLLECTION')(uri)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CollectionProvider);

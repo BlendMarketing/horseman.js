@@ -1,6 +1,5 @@
 import 'isomorphic-fetch';
 
-
 /**
  * Fetch a singular endpoint from an api and dispatches actions depending on
  * the result.
@@ -22,11 +21,13 @@ export const fetchEntryFactory = successAction => endpoint => (dispatch, getStat
     (response) => {
       if (response.ok) {
         return response.json()
-          .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }));
+          .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }))
+          .catch(() => dispatch({ type: '@@horseman/BAD_JSON', meta: { endpoint } }));
       }
       return dispatch({ type: '@@horseman/FETCH_ENTRY_FAIL', meta: { endpoint } });
     },
-  );
+  )
+  .catch(e => dispatch({ type: '@@horseman/BAD_REQUEST', meta: { endpoint } }));
 };
 
 /**
@@ -46,8 +47,14 @@ export const fetchCollectionFactory = successAction => endpoint => (dispatch, ge
 
   return fetch(endpoint)
   .then(
-    response => response.json()
-    .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload })),
+    (response) => {
+      if (response.ok) {
+        return response.json()
+        .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }))
+        .catch(() => dispatch({ type: '@@horseman/BAD_JSON', meta: { endpoint } }));
+      }
+      return dispatch({ type: '@@horseman/FETCH_COLLECTION_FAIL', meta: { endpoint } });
+    },
   )
-  .catch(() => dispatch({ type: '@@horseman/FETCH_COLLECTION_FAIL', meta: { endpoint } }));
+  .catch(() => dispatch({ type: '@@horseman/BAD_REQUEST', meta: { endpoint } }));
 };

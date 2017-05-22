@@ -26,6 +26,7 @@
     "karma-mocha-reporter": "^2.2.3",
     "karma-webpack": "^2.0.3",
     "mocha-webpack": "^0.7.0",
+    "mock-fetch-api": "^1.0.7",
     "node-noop": "^1.0.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
