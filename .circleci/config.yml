@@ -3,6 +3,7 @@ jobs:
   build:
     working_directory: ~/horseman.js
     docker:
+      - image: node:7.10.0
       - image: node:6.10.3
     steps:
       - checkout
