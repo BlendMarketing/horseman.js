@@ -7,7 +7,7 @@
     "test": "karma start --single-run",
     "test-watch": "karma start --run-once",
     "lint": "eslint ./src",
-    "prepublish": "webpack"
+    "prepublishOnly": "webpack"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1"
