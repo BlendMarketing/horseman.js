@@ -7,7 +7,7 @@
     "test": "karma start --single-run",
     "test-watch": "karma start --run-once",
     "lint": "eslint ./src",
-    "build": "webpack"
+    "postinstall": "webpack"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
