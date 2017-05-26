@@ -9,6 +9,18 @@ module.exports = {
     ],
   },
   devtool: 'source-map',
+  externals: {
+    'react-redux': 'react-redux',
+    PropTypes: 'prop-types',
+    Redirect: 'react-router-dom',
+    thunk: 'redux-thunk',
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+  },
   module: {
     rules: [
       {
@@ -26,19 +38,14 @@ module.exports = {
     ],
   },
   plugins: [
-    // new webpack.optimize.UglifyJsPlugin({
-    //   comments: false,
-    // }),
-    // new webpack.DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify('production'),
-    // }),
-    new webpack.ProvidePlugin({
-      Promise: 'es6-promise',
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    library: 'horseman.js',
     libraryTarget: 'umd',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
   },
 };

@@ -12,7 +12,7 @@ module.exports = function (config) {
             {pattern: './src/**/*.spec.js', watched: false, included: true, served: true}
         ],
         preprocessors: {
-            './src/**/*.spec.js': ['webpack']
+            './src/**/*.spec.js': ['webpack', 'sourcemap']
         },
         reporters: ['mocha'],
         webpack: Object.assign(webpackConfig, {
