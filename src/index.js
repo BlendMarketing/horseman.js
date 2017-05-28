@@ -1,13 +1,10 @@
 /**
  * @module horseman.js
  */
-import RichText from './components/RichText';
-import ResourceProvider from './providers/ResourceProvider';
+import { ConnectedResourceProvider } from './providers/ResourceProvider';
 import Reducers from './reducers/index';
 
-export {
-  ResourceProvider,
-  RichText,
+export default {
+  ResourceProvider: ConnectedResourceProvider,
   Reducers,
 };
-

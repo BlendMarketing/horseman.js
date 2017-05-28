@@ -92,4 +92,7 @@ export const mapDispatchToProps = dispatch => ({
   getResource: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResourceProvider);
+export const ConnectedResourceProvider = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ResourceProvider);
