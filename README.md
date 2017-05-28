@@ -18,11 +18,41 @@ with external data sources. This allows for a development toolchain that gives
 content editors the ability to work in familiar systems (Wordpress, Craft) and
 gives developers the ability to develop modern frontend websites with that data.
 
-Horseman.js exposes this functionality through the use of several `Provider`
-components. These providers are responsible for fetching data from an external
+Horseman.js exposes this functionality through the use of the `ResourceProvider`
+component. This providers is responsible for fetching data from an external
 API and passing that information to react components for consumption as a prop.
 
+The `ResourceProvider` is most commonly used inside of the
+[react-router][router].
+
 ## Usage
+Any component that depends on an external API call for information can be
+wrapped in the `ResourceProvider`. Inform the provider of the endpoint to call
+and the data will be provided to your component via the `render` method.
+
+### Standard Requests
+To simply fetch data from known endpoint and pass the json into a custom
+component, use the `endpoint` prop of the provider. The json at the requested
+endpoint will be passed along to your component through the `render` function
+parameter.
+
+```js
+import { ResourceProvider } from 'horseman.js';
+
+<ResourceProvider
+  endpoint="http://example.com/resources/myresource.json"
+  render={resource => (
+    <MyEntry resource={resource} />
+  )}
+/>
+```
+
+### Templated Requests
+
+Many requests don't have a fixed url for fetching information and instead rely on
+the current route to determine what information to load. If you utilize
+, in those cases
+you are able to send along a templated
 
 
 ## Installation
@@ -40,3 +70,4 @@ or
 [redux]: http://redux.js.org/
 [craft]: https://craftcms.com/
 [wp]: https://wordpress.org/
+[router]: https://reacttraining.com/react-router/web/guides/quick-start

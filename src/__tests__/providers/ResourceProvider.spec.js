@@ -7,7 +7,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { ResourceProvider } from '../../providers/ResourceProvider';
+import { ResourceProvider, mapStateToProps, mapDispatchToProps } from '../../providers/ResourceProvider';
 import Loading from '../../components/Loading';
 
 describe('ResourceProvider', () => {
@@ -74,5 +74,65 @@ describe('ResourceProvider', () => {
     );
     expect(wrapper.find(ResourceComponent)).to.have.length(1);
     expect(wrapper.html()).to.equal(`<div>${resource.foo} ${resource.hello}</div>`);
+  });
+
+  describe('Should mapStateToProps appropriately', () => {
+    it('with empty state', () => {
+      const state = {
+        horsemanResources: {},
+      };
+      const ownProps = {
+        endpoint: 'http://example.com/:slug',
+        endpointVars: {
+          slug: 'example',
+        },
+      };
+
+      const expected = {
+        resourceUrl: 'http://example.com/example',
+        resource: { loading: true },
+      };
+
+      const exportedProps = mapStateToProps(state, ownProps);
+
+      expect(exportedProps).to.deep.equal(expected);
+    });
+    it('with hydrated state', () => {
+      const state = {
+        horsemanResources: {
+          'http://example.com/resource': {
+            title: 'foo',
+          },
+        },
+      };
+
+      const ownProps = {
+        endpoint: 'http://example.com/:slug',
+        endpointVars: {
+          slug: 'resource',
+        },
+      };
+
+      const expected = {
+        resourceUrl: 'http://example.com/resource',
+        resource: { title: 'foo' },
+      };
+
+      const exportedProps = mapStateToProps(state, ownProps);
+
+      expect(exportedProps).to.deep.equal(expected);
+    });
+  });
+
+  it('Should mapDispatchToProps appropriately', () => {
+    const dispatch = sinon.spy();
+    const { getResource, ...rest } = mapDispatchToProps(dispatch);
+    const resourceUrl = 'http://example.com';
+    const otherPropsExpected = {};
+
+    getResource(resourceUrl);
+
+    expect(dispatch.calledOnce).to.equal(true);
+    expect(rest).to.deep.equal(otherPropsExpected);
   });
 });

@@ -76,8 +76,8 @@ ResourceProvider.propTypes = {
   loadingComponent: PropTypes.func,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  const resourceUrl = ParseEndpoint(ownProps.endpoint, ownProps.match.params);
+export const mapStateToProps = (state, ownProps) => {
+  const resourceUrl = ParseEndpoint(ownProps.endpoint, ownProps.endpointVars);
 
   return {
     resourceUrl,
@@ -88,7 +88,7 @@ const mapStateToProps = (state, ownProps) => {
 /**
  * The component needs to be able to fetch the resource we want.
  */
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   getResource: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
 });
 
