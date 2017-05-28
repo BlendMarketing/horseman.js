@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import Loading from '../components/Loading';
  * in a backend. The data returned will be stored in the "entry"
  * prop of the child component.
  */
-class EntryProvider extends Component {
+class EntryProvider extends React.Component {
 
   componentWillMount() {
     this.refreshComponent();

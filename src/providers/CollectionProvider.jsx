@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import Loading from '../components/Loading';
  *
  * @author Jared Meyering <jared.meyering@gmail.com>
  */
-class CollectionProvider extends Component {
+class CollectionProvider extends React.Component {
 
   componentWillMount() {
     this.refreshComponent();

@@ -9,7 +9,6 @@ import WordpressCollectionProvider from './providers/WordpressCollectionProvider
 
 import Reducers from './reducers/index';
 
-
 export {
   CraftEntryProvider,
   CraftCollectionProvider,
