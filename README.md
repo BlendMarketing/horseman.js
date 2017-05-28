@@ -72,6 +72,9 @@ import { ResourceProvider } from 'horseman.js';
 />
 ```
 
+The endpoint fetched in the above example would be
+`http://example.com/resources/foo.json`
+
 #### Working with react-router
 
 This pattern works hand in hand with react-router if you want to match
@@ -82,7 +85,7 @@ import { Route } from 'react-router-dom';
 import { ResourceProvider } from 'horseman.js';
 
 <Route
-  exact path="/components/:slug"
+  exact path="/resources/:slug"
   render={({ match }) =>
     <ResourceProvider
       endpoint="http://example.com/resources/:slug.json"
