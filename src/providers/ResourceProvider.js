@@ -74,6 +74,26 @@ ResourceProvider.propTypes = {
    * The component to render while the data is being fetched.
    */
   loadingComponent: PropTypes.func,
+
+  /* eslint-disable react/no-unused-prop-types */
+  /**
+   * The endpoint that will be used to fetch the resource. May be a static url
+   * or a url that requires templating.
+   *
+   * Templated urls follow `react-router` matching pattern.
+   *
+   * http://example.com/:templatedPath?q=:templatedParam
+   *
+   * If a templated url is passed in, the `endpointVars` prop should contain
+   * an object with key:value pairs matching the requested url sections
+   */
+  endpoint: PropTypes.string.isRequired,
+
+  /**
+   * The variables that will be used to build out a templated endpoint
+   */
+  endpointVars: PropTypes.object,
+  /* eslint-enable react/no-unused-prop-types */
 };
 
 export const mapStateToProps = (state, ownProps) => {

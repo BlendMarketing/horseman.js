@@ -49,11 +49,48 @@ import { ResourceProvider } from 'horseman.js';
 
 ### Templated Requests
 
-Many requests don't have a fixed url for fetching information and instead rely on
-the current route to determine what information to load. If you utilize
-, in those cases
-you are able to send along a templated
+Many requests don't have a fixed url for fetching information and instead rely
+on external data to determine what information to load.
 
+ResourceProvider endpoints are able to be templates by prefixing dynamic
+sections with a `:`.
+
+The `ResourceProvider` will swap out these sections with the value passed to the
+`endpointVars` prop.
+
+```js
+import { ResourceProvider } from 'horseman.js';
+
+<ResourceProvider
+  endpoint="http://example.com/resources/:slug.json"
+  endpointVars={{
+    slug: 'foo'
+  }}
+  render={resource => (
+    <MyEntry resource={resource} />
+  )}
+/>
+```
+
+#### Working with react-router
+
+This pattern works hand in hand with react-router if you want to match
+`endpointVars` with route matches.
+
+```js
+<Route
+  exact path="/components/:slug"
+  render={({ match }) =>
+    <ResourceProvider
+      endpoint="http://example.com/resources/:slug.json"
+      endpointVars={match.params}
+      render={resource => (
+        <MyEntry resource={resource} />
+      )}
+    />
+  }
+/>
+```
 
 ## Installation
 
