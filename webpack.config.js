@@ -10,10 +10,30 @@ module.exports = {
   },
   devtool: 'source-map',
   externals: {
-    'react-redux': 'react-redux',
-    PropTypes: 'prop-types',
-    Redirect: 'react-router-dom',
-    thunk: 'redux-thunk',
+    'react-redux': {
+      root: 'ReactRedux',
+      commonjs2: 'react-redux',
+      commonjs: 'react-redux',
+      amd: 'react-redux',
+    },
+    'prop-types': {
+      root: 'PropTypes',
+      commonjs2: 'prop-types',
+      commonjs: 'prop-types',
+      amd: 'prop-types',
+    },
+    'react-router-dom': {
+      root: 'ReactRouterDOM',
+      commonjs2: 'react-router-dom',
+      commonjs: 'react-router-dom',
+      amd: 'react-router-dom',
+    },
+    'redux-thunk': {
+      root: 'ReduxThunk',
+      commonjs2: 'redux-thunk',
+      commonjs: 'redux-thunk',
+      amd: 'redux-thunk',
+    },
     react: {
       root: 'React',
       commonjs2: 'react',

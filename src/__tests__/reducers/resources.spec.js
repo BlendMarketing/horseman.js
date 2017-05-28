@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import entriesReducer from '../../reducers/entries';
+import resourcesReducer from '../../reducers/resources';
 import * as types from '../../constants/ActionTypes';
 
-describe('Entries Reducer', () => {
+describe('Resources Reducer', () => {
   const initialState = {};
 
   it('should return the initial state', () => {
-    expect(entriesReducer(undefined, {})).to.deep.equal(initialState);
-    expect(entriesReducer({
+    expect(resourcesReducer(undefined, {})).to.deep.equal(initialState);
+    expect(resourcesReducer({
       foo: {
         data: 'bar',
       },
@@ -20,9 +20,9 @@ describe('Entries Reducer', () => {
     });
   });
 
-  it('should handle a new request to fetch a entry', () => {
-    expect(entriesReducer(undefined, {
-      type: types.ENTRY_REQUEST,
+  it('should handle a new request to fetch a resource', () => {
+    expect(resourcesReducer(undefined, {
+      type: types.RESOURCE_REQUEST,
       meta: {
         endpoint: 'foo',
       },
@@ -33,13 +33,13 @@ describe('Entries Reducer', () => {
     });
   });
 
-  it('should handle a new request to fetch an entry when data exists', () => {
-    expect(entriesReducer({
+  it('should handle a new request to fetch an resource when data exists', () => {
+    expect(resourcesReducer({
       foo: {
         data: 'bar',
       },
     }, {
-      type: types.ENTRY_REQUEST,
+      type: types.RESOURCE_REQUEST,
       meta: {
         endpoint: 'bar',
       },
@@ -53,13 +53,13 @@ describe('Entries Reducer', () => {
     });
   });
 
-  it('should handle adding an entry that failed to fetch', () => {
-    expect(entriesReducer({
+  it('should handle adding an resource that failed to fetch', () => {
+    expect(resourcesReducer({
       foo: {
         data: 'bar',
       },
     }, {
-      type: types.ENTRY_FAIL,
+      type: types.RESOURCE_FAIL,
       meta: {
         endpoint: 'bar',
       },
@@ -73,13 +73,13 @@ describe('Entries Reducer', () => {
     });
   });
 
-  it('should handle adding a craft entry', () => {
-    expect(entriesReducer({
+  it('should handle adding a resource', () => {
+    expect(resourcesReducer({
       foo: {
         data: 'bar',
       },
     }, {
-      type: types.ADD_CRAFT_ENTRY,
+      type: types.ADD_RESOURCE,
       meta: {
         endpoint: 'bar',
       },

@@ -7,17 +7,17 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import EntryProvider from '../../providers/EntryProvider';
+import { ResourceProvider } from '../../providers/ResourceProvider';
 import Loading from '../../components/Loading';
 
-describe('EntryProvider', () => {
-  it('Should render the loading component if the entry is loading', () => {
+describe('ResourceProvider', () => {
+  it('Should render the loading component if the resource is loading', () => {
     const fetchFunc = sinon.spy();
     const wrapper = shallow(
-      <EntryProvider
-        getEntry={fetchFunc}
-        entryUrl="/foo"
-        entry={{ loading: true }}
+      <ResourceProvider
+        getResource={fetchFunc}
+        resourceUrl="/foo"
+        resource={{ loading: true }}
         render={() => (<div><h1>loaded</h1></div>)}
       />,
     );
@@ -30,10 +30,10 @@ describe('EntryProvider', () => {
       <h1>alternate loading</h1>
     );
     const wrapper = shallow(
-      <EntryProvider
-        getEntry={fetchFunc}
-        entryUrl="/foo"
-        entry={{ loading: true }}
+      <ResourceProvider
+        getResource={fetchFunc}
+        resourceUrl="/foo"
+        resource={{ loading: true }}
         render={() => (<div><h1>loaded</h1></div>)}
         loadingComponent={AlternateLoading}
       />,
@@ -41,13 +41,13 @@ describe('EntryProvider', () => {
     expect(wrapper.find(AlternateLoading)).to.have.length(1);
   });
 
-  it('Should redirect to the 404 page if an endpoint does not return an entry', () => {
+  it('Should redirect to the 404 page if an endpoint does not return an resource', () => {
     const fetchFunc = sinon.spy();
     const wrapper = shallow(
-      <EntryProvider
-        getEntry={fetchFunc}
-        entryUrl="/foo"
-        entry={{ error: true }}
+      <ResourceProvider
+        getResource={fetchFunc}
+        resourceUrl="/foo"
+        resource={{ error: true }}
         render={() => (<div><h1>loaded</h1></div>)}
       />,
     );
@@ -55,24 +55,24 @@ describe('EntryProvider', () => {
     expect(wrapper.find(Redirect).props().to).to.equal('/404');
   });
 
-  it('Should render the requested component if an entry returns successfully', () => {
-    const entry = {
+  it('Should render the requested component if an resource returns successfully', () => {
+    const resource = {
       foo: 'bar',
       hello: 'world',
     };
     const fetchFunc = sinon.spy();
-    const EntryComponent = ({ e }) => (
+    const ResourceComponent = ({ e }) => (
       <div>{ e.foo } { e.hello }</div>
     );
     const wrapper = shallow(
-      <EntryProvider
-        getEntry={fetchFunc}
-        entryUrl="/foo"
-        entry={entry}
-        render={e => <EntryComponent e={e} />}
+      <ResourceProvider
+        getResource={fetchFunc}
+        resourceUrl="/foo"
+        resource={resource}
+        render={e => <ResourceComponent e={e} />}
       />,
     );
-    expect(wrapper.find(EntryComponent)).to.have.length(1);
-    expect(wrapper.html()).to.equal(`<div>${entry.foo} ${entry.hello}</div>`);
+    expect(wrapper.find(ResourceComponent)).to.have.length(1);
+    expect(wrapper.html()).to.equal(`<div>${resource.foo} ${resource.hello}</div>`);
   });
 });

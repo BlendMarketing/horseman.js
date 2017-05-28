@@ -1,7 +1,5 @@
-import entries from './entries';
-import collections from './collections';
+import resources from './resources';
 
 export default {
-  horsemanEntries: entries,
-  horsemanCollections: collections,
+  horsemanResources: resources,
 };

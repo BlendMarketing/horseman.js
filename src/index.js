@@ -2,17 +2,11 @@
  * @module horseman.js
  */
 import RichText from './components/RichText';
-
-import CraftEntryProvider from './providers/CraftEntryProvider';
-import CraftCollectionProvider from './providers/CraftCollectionProvider';
-import WordpressCollectionProvider from './providers/WordpressCollectionProvider';
-
+import ResourceProvider from './providers/ResourceProvider';
 import Reducers from './reducers/index';
 
 export {
-  CraftEntryProvider,
-  CraftCollectionProvider,
-  WordpressCollectionProvider,
+  ResourceProvider,
   RichText,
   Reducers,
 };
