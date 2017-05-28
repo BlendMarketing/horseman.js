@@ -78,6 +78,9 @@ This pattern works hand in hand with react-router if you want to match
 `endpointVars` with route matches.
 
 ```js
+import { Route } from 'react-router-dom';
+import { ResourceProvider } from 'horseman.js';
+
 <Route
   exact path="/components/:slug"
   render={({ match }) =>
