@@ -1,7 +1,8 @@
 {
   "name": "horseman.js",
   "version": "1.0.0-alpha15",
-  "main": "dist/index.js",
+  "main": "dist/horseman.js",
+  "module": "src/index.js",
   "license": "MIT",
   "scripts": {
     "test": "karma start --single-run",
