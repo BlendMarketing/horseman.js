@@ -106,6 +106,23 @@ or
 
 `npm -i horseman.js --save`
 
+### Prerequisites
+
+Horseman assumes that your environment is already setup with React and Redux.
+In addition, we assume that you have set up the [`redux-thunk`][thunk]
+middleware.
+
+You will need to add the horseman reducers to your application.
+
+```js
+import { combineReducers } from 'redux';
+
+import { Reducers as horsemanReducers } from 'horseman.js';
+
+export default combineReducers({
+  ...horsemanReducers,
+});
+```
 
 ## Entry Providers
 
@@ -114,3 +131,4 @@ or
 [craft]: https://craftcms.com/
 [wp]: https://wordpress.org/
 [router]: https://reacttraining.com/react-router/web/guides/quick-start
+[thunk]: https://github.com/gaearon/redux-thunk
