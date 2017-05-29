@@ -1,6 +1,6 @@
 {
   "name": "horseman.js",
-  "version": "1.0.0-alpha13",
+  "version": "1.0.0-alpha14",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
