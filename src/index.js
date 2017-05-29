@@ -1,10 +1,10 @@
 /**
  * @module horseman.js
  */
-import { ConnectedResourceProvider } from './providers/ResourceProvider';
+import { ConnectedResourceProvider as ResourceProvider } from './providers/ResourceProvider';
 import Reducers from './reducers/index';
 
-export default {
-  ResourceProvider: ConnectedResourceProvider,
+export {
   Reducers,
+  ResourceProvider,
 };

@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import horseman from '../index';
+import * as horseman from '../index';
 
 import { ConnectedResourceProvider } from '../providers/ResourceProvider';
 import reducers from '../reducers/index';
