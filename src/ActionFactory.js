@@ -1,4 +1,4 @@
-import 'isomorphic-fetch';
+import 'fetch-everywhere';
 import * as types from './constants/ActionTypes';
 
 /**
