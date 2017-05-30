@@ -112,19 +112,47 @@ Horseman assumes that your environment is already setup with React and Redux.
 In addition, we assume that you have set up the [`redux-thunk`][thunk]
 middleware.
 
-You will need to add the horseman reducers to your application.
-
-```js
-import { combineReducers } from 'redux';
-
-import { Reducers as horsemanReducers } from 'horseman.js';
-
-export default combineReducers({
-  ...horsemanReducers,
-});
+## Simple Example with react-router
 ```
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+import { Router, Route, browserHistory } from 'react-router'
+import { Reducers as horsemanReducers } from 'horseman.js'
 
-## Entry Providers
+import reducers from '<project-path>/reducers'
+
+// Add the horseman reducers to the store
+const store = createStore(
+  combineReducers({
+    ...reducers,
+    ...horsemanReducers,
+    routing: routerReducer
+  })
+)
+
+const history = syncHistoryWithStore(browserHistory, store)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <Route path="foo" render={({match}) => {
+          <ResourceProvider
+            endpoint="http://example.com/resources/:slug.json"
+            endpointVars={match.params}
+            render={resource => (
+              <MyEntry resource={resource} />
+            )}
+          />
+        }}/>
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+)
+```
 
 [react]: https://facebook.github.io/react/
 [redux]: http://redux.js.org/
