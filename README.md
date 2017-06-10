@@ -1,24 +1,24 @@
-![CircleCI](https://circleci.com/gh/BlendMarketing/horseman.js.svg?style=svg&circle-token=f8c7c6e3c3d2e0428d9782e733b6a8ac6ef8e94c)
-![David-DM](https://david-dm.org/blendmarketing/horseman.js.svg)
+![CircleCI](https://circleci.com/gh/BlendMarketing/horseman-core.svg?style=svg&circle-token=f8c7c6e3c3d2e0428d9782e733b6a8ac6ef8e94c)
+![David-DM](https://david-dm.org/blendmarketing/horseman-core.svg)
 
-# Horseman.js
+# Horseman
 
 A library for working with [React][react], [Redux][redux] and external APIs,
 specifically targeting API's exposing information stored in a CMS.
 
-horseman.js is a part of the [Blend Marketing](https://blend.marketing)
+horseman-core is a part of the [Blend Marketing](https://blend.marketing)
 development toolchain. At Blend we primarially work with [CraftCMS][craft] and
-[Wordpress][wp] backed CMS, so horseman.js is targeted **primarially** at those
+[Wordpress][wp] backed CMS, so horseman is targeted **primarially** at those
 platforms.
 
 ## Concepts
 
-The tools in horseman.js enable a react / redux application to easily connect
+The tools in horseman enable a react / redux application to easily connect
 with external data sources. This allows for a development toolchain that gives
 content editors the ability to work in familiar systems (Wordpress, Craft) and
 gives developers the ability to develop modern frontend websites with that data.
 
-Horseman.js exposes this functionality through the use of the `ResourceProvider`
+Horseman exposes this functionality through the use of the `ResourceProvider`
 component. This providers is responsible for fetching data from an external
 API and passing that information to react components for consumption as a prop.
 
@@ -37,7 +37,7 @@ endpoint will be passed along to your component through the `render` function
 parameter.
 
 ```js
-import { ResourceProvider } from 'horseman.js';
+import { ResourceProvider } from 'horseman-core';
 
 <ResourceProvider
   endpoint="http://example.com/resources/myresource.json"
@@ -59,7 +59,7 @@ The `ResourceProvider` will swap out these sections with the value passed to the
 `endpointVars` prop.
 
 ```js
-import { ResourceProvider } from 'horseman.js';
+import { ResourceProvider } from 'horseman-core';
 
 <ResourceProvider
   endpoint="http://example.com/resources/:slug.json"
@@ -82,7 +82,7 @@ This pattern works hand in hand with react-router if you want to match
 
 ```js
 import { Route } from 'react-router-dom';
-import { ResourceProvider } from 'horseman.js';
+import { ResourceProvider } from 'horseman-core';
 
 <Route
   exact path="/resources/:slug"
@@ -100,11 +100,11 @@ import { ResourceProvider } from 'horseman.js';
 
 ## Installation
 
-`yarn add horseman.js`
+`yarn add horseman-core`
 
 or
 
-`npm -i horseman.js --save`
+`npm -i horseman-core --save`
 
 ### Prerequisites
 
@@ -119,7 +119,7 @@ import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
-import { Reducers as horsemanReducers } from 'horseman.js'
+import { Reducers as horsemanReducers } from 'horseman-core'
 
 import reducers from '<project-path>/reducers'
 
