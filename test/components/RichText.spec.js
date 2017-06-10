@@ -4,7 +4,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-import RichText from '../../components/RichText';
+import RichText from '../../src/components/RichText';
 
 describe('RichText', () => {
   const html = '<div><h1>Hey There</h1></div>';

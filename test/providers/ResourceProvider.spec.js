@@ -7,8 +7,8 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import { ResourceProvider, mapStateToProps, mapDispatchToProps } from '../../providers/ResourceProvider';
-import Loading from '../../components/Loading';
+import { ResourceProvider, mapStateToProps, mapDispatchToProps } from '../../src/providers/ResourceProvider';
+import Loading from '../../src/components/Loading';
 
 describe('ResourceProvider', () => {
   it('Should render the loading component if the resource is loading', () => {

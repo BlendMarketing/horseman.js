@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import resourcesReducer from '../../reducers/resources';
-import * as types from '../../constants/ActionTypes';
+import resourcesReducer from '../../src/reducers/resources';
+import * as types from '../../src/constants/ActionTypes';
 
 describe('Resources Reducer', () => {
   const initialState = {};

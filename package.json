@@ -1,14 +1,16 @@
 {
   "name": "horseman.js",
   "version": "1.0.0-alpha17",
-  "main": "dist/horseman.js",
-  "module": "src/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "license": "MIT",
+  "author": "Jared Meyering <jared@blendimc.com>",
   "scripts": {
     "test": "karma start --single-run",
     "test-watch": "karma start --run-once",
     "lint": "eslint ./src",
-    "prepublishOnly": "webpack"
+    "build": "node ./tools/build.js",
+    "prepublishOnly": "node ./tools/build.js"
   },
   "dependencies": {
     "fetch-everywhere": "^1.0.5"
@@ -55,6 +57,7 @@
     "redux-mock-store": "^1.2.3",
     "redux-test-utils": "^0.1.2",
     "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.1",
     "sinon": "^2.1.0",
     "webpack": "^2.5.1"
   }

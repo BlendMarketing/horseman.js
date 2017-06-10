@@ -1,14 +1,6 @@
 const webpack = require('webpack');
-const path = require('path');
 
 module.exports = {
-  cache: true,
-  entry: {
-    app: [
-      path.join(__dirname, 'src/index.js'),
-    ],
-  },
-  devtool: 'source-map',
   externals: [
     'react-redux',
     'prop-types',
@@ -38,9 +30,7 @@ module.exports = {
     }),
   ],
   output: {
-    library: 'horseman',
+    library: 'Horseman',
     libraryTarget: 'umd',
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'horseman.js',
   },
 };

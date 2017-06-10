@@ -1,10 +1,10 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import * as horseman from '../index';
+import * as horseman from '../src/index';
 
-import { ConnectedResourceProvider } from '../providers/ResourceProvider';
-import reducers from '../reducers/index';
+import { ConnectedResourceProvider } from '../src/providers/ResourceProvider';
+import reducers from '../src/reducers/index';
 
 describe('horseman.js index', () => {
   describe('should export', () => {

@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import ParseEndpoint from '../ParseEndpoint';
+import ParseEndpoint from '../src/ParseEndpoint';
 
 describe('ParseEndpoint', () => {
   it('should parse endpoints with dynamic portions', () => {
