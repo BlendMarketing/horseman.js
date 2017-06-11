@@ -6,11 +6,11 @@
   "license": "MIT",
   "author": "Jared Meyering <jared@blendimc.com>",
   "scripts": {
-    "test": "karma start --single-run",
-    "test-watch": "karma start --run-once",
+    "build": "node ./tools/build.js horseman-core",
     "lint": "eslint ./src",
-    "build": "node ./tools/build.js",
-    "prepublishOnly": "node ./tools/build.js"
+    "prepublishOnly": "npm run build",
+    "test": "karma start --single-run",
+    "test-watch": "karma start --run-once"
   },
   "dependencies": {
     "fetch-everywhere": "^1.0.5"

@@ -1,6 +1,12 @@
 /* eslint-disable */
 const execSync = require('child_process').execSync;
 const rimraf = require('rimraf');
+const umdFileName = process.argv[2];
+
+if (typeof umdFileName === 'undefined') {
+  console.error("umd package name required");
+  process.exit(1);
+}
 
 try {
   rimraf.sync('./dist');
@@ -26,14 +32,14 @@ exec('babel src/ -d dist/es', {
     BABEL_ENV: 'es',
 });
 
-console.log('\nBuilding horseman-core.js ...');
+console.log('\nBuilding '+ umdFileName + '.js ...');
 
-exec('webpack src/index.js dist/umd/horseman-core.js', {
+exec('webpack src/index.js dist/umd/' + umdFileName + '.js', {
     NODE_ENV: 'production',
 });
 
-console.log('\nBuilding horseman-core.min.js ...');
+console.log('\nBuilding '+ umdFileName + '.min.js ...');
 
-exec('webpack -p src/index.js dist/umd/horseman-core.min.js', {
+exec('webpack -p src/index.js dist/umd/' + umdFileName + '.min.js', {
     NODE_ENV: 'production',
 });
