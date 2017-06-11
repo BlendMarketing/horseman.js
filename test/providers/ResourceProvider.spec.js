@@ -39,6 +39,8 @@ describe('ResourceProvider', () => {
       <ResourceProvider {...props} />,
     );
 
+    expect(fetchFunc.calledOnce).to.equal(true);
+
     wrapper.setProps({
       ...props,
       endpointVars: {
