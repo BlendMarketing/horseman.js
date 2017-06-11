@@ -37,6 +37,11 @@ export class ResourceProvider extends React.Component {
     this.refreshComponent();
   }
 
+  componentWillReceiveProps(nextProps){
+    this.props = nextProps;
+    this.refreshComponent();
+  }
+
   /**
    * When the component is refreshed we check the resource to be sure we have the
    * latest data to paint the DOM
