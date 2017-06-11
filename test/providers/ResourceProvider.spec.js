@@ -16,7 +16,7 @@ describe('ResourceProvider', () => {
       <ResourceProvider
         getResource={fetchFunc}
         resourceUrl="/foo"
-        resource={{ error: true }}
+        resource={{ meta: { error: true } }}
         render={() => (<div><h1>loaded</h1></div>)}
       />,
     );
@@ -32,7 +32,7 @@ describe('ResourceProvider', () => {
       endpoint: '/foo/:slug',
       resourceUrl: '/foo/baz',
       endpointVars: { slug: 'baz' },
-      resource: {},
+      resource: { meta: {}, data: {} },
       render: () => null,
     };
     const wrapper = shallow(
@@ -118,7 +118,7 @@ describe('ResourceProvider', () => {
 
       const expected = {
         resourceUrl: 'http://example.com/example',
-        resource: { loading: true },
+        resource: { meta: { loading: true, error: false }, data: {} },
       };
 
       const exportedProps = mapStateToProps(state, ownProps);

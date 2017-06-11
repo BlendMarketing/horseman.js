@@ -49,7 +49,7 @@ export class ResourceProvider extends React.Component {
   render() {
     const { resource, render } = this.props;
 
-    if (resource.error) {
+    if (resource.meta.error) {
       return <Redirect to="/404" />;
     }
 
@@ -105,7 +105,8 @@ export const mapStateToProps = (state, ownProps) => {
 
   return {
     resourceUrl,
-    resource: state.horsemanResources[resourceUrl] || { loading: true },
+    resource: state.horsemanResources[resourceUrl] ||
+      { meta: { loading: true, error: false }, data: {} },
   };
 };
 
