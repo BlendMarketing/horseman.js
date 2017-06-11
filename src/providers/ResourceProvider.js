@@ -6,10 +6,9 @@ import { connect } from 'react-redux';
 import ParseEndpoint from '../ParseEndpoint';
 import * as types from '../constants/ActionTypes';
 import ActionFactory from '../ActionFactory';
-import Loading from '../components/Loading';
 
 /**
- * Responsibe for managing a component that will be rendered using data stored
+ * Responsible for managing a component that will be rendered using data stored
  * in a backend. The data returned will be stored in the "resource"
  * prop of the child component.
  */
@@ -19,7 +18,22 @@ export class ResourceProvider extends React.Component {
     this.refreshComponent();
   }
 
-  componentWillUpdate() {
+  /**
+   * When the component is updating, we need to check the props to see if the
+   * next requests requires us to fetch new data from the endpoint.
+   *
+   * So we check the resourceUrl value here and if it's a new request, we
+   * refresh the component otherwise we do nothing.
+   */
+  componentWillReceiveProps(nextProps) {
+    const oldUrl = ParseEndpoint(this.props.endpoint, this.props.endpointVars);
+    const newUrl = ParseEndpoint(nextProps.endpoint, nextProps.endpointVars);
+
+    if (oldUrl === newUrl) {
+      return;
+    }
+
+    this.props = nextProps;
     this.refreshComponent();
   }
 
@@ -34,17 +48,12 @@ export class ResourceProvider extends React.Component {
 
   render() {
     const { resource, render } = this.props;
-    const LoadingComponent = this.props.loadingComponent || Loading;
 
     if (resource.error) {
       return <Redirect to="/404" />;
     }
 
-    if (resource.loading) {
-      return <LoadingComponent />;
-    }
-
-    return render(resource);
+    return render(resource.data, resource.meta);
   }
 }
 
@@ -69,11 +78,6 @@ ResourceProvider.propTypes = {
    * Func to be rendered once the resource comes back
    */
   render: PropTypes.func.isRequired,
-
-  /**
-   * The component to render while the data is being fetched.
-   */
-  loadingComponent: PropTypes.func,
 
   /* eslint-disable react/no-unused-prop-types */
   /**

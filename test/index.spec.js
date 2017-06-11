@@ -4,12 +4,13 @@ import { expect } from 'chai';
 import * as horseman from '../src/index';
 
 import { ConnectedResourceProvider } from '../src/providers/ResourceProvider';
-import reducers from '../src/reducers/index';
+import horsemanReducer from '../src/reducers/horsemanReducer';
 
 describe('horseman.js index', () => {
   describe('should export', () => {
     it('reducers', () => {
-      expect(horseman.Reducers).to.deep.equal(reducers);
+      expect(horseman.horsemanReducer).to.be.a('function')
+      .and.deep.equal(horsemanReducer);
     });
     it('the ResourceProvider', () => {
       expect(horseman.ResourceProvider).to.deep.equal(ConnectedResourceProvider);

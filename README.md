@@ -41,11 +41,19 @@ import { ResourceProvider } from 'horseman-core';
 
 <ResourceProvider
   endpoint="http://example.com/resources/myresource.json"
-  render={resource => (
-    <MyEntry resource={resource} />
+  render={(data, meta) => (
+    <MyEntry resource={data} />
   )}
 />
 ```
+
+### Render Prop
+
+Once data has successfully returned from the endpoint, the provider will execute
+the function given through the render prop. The first argument to render will
+be the parsed json data located at the endpoint. The second argument will be a
+json object representing request meta information such as `loading` and `error`
+states.
 
 ### Templated Requests
 

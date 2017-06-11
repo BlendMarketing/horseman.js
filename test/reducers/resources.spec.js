@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai';
-import resourcesReducer from '../../src/reducers/resources';
+import horsemanReducer from '../../src/reducers/horsemanReducer';
 import * as types from '../../src/constants/ActionTypes';
 
 describe('Resources Reducer', () => {
   const initialState = {};
 
   it('should return the initial state', () => {
-    expect(resourcesReducer(undefined, {})).to.deep.equal(initialState);
-    expect(resourcesReducer({
+    expect(horsemanReducer(undefined, {})).to.deep.equal(initialState);
+    expect(horsemanReducer({
       foo: {
         data: 'bar',
       },
@@ -21,22 +21,32 @@ describe('Resources Reducer', () => {
   });
 
   it('should handle a new request to fetch a resource', () => {
-    expect(resourcesReducer(undefined, {
+    expect(horsemanReducer(undefined, {
       type: types.RESOURCE_REQUEST,
       meta: {
         endpoint: 'foo',
       },
     })).to.deep.equal({
       foo: {
-        loading: true,
+        meta: {
+          error: false,
+          loading: true,
+        },
+        data: {},
       },
     });
   });
 
   it('should handle a new request to fetch an resource when data exists', () => {
-    expect(resourcesReducer({
+    expect(horsemanReducer({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
     }, {
       type: types.RESOURCE_REQUEST,
@@ -45,18 +55,34 @@ describe('Resources Reducer', () => {
       },
     })).to.deep.equal({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
       bar: {
-        loading: true,
+        meta: {
+          loading: true,
+          error: false,
+        },
+        data: {},
       },
     });
   });
 
-  it('should handle adding an resource that failed to fetch', () => {
-    expect(resourcesReducer({
+  it('should handle reducing an resource that failed to fetch', () => {
+    expect(horsemanReducer({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
     }, {
       type: types.RESOURCE_FAIL,
@@ -65,18 +91,34 @@ describe('Resources Reducer', () => {
       },
     })).to.deep.equal({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
       bar: {
-        error: true,
+        meta: {
+          loading: false,
+          error: true,
+        },
+        data: {},
       },
     });
   });
 
-  it('should handle adding a resource', () => {
-    expect(resourcesReducer({
+  it('should handle reducing a resource', () => {
+    expect(horsemanReducer({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
     }, {
       type: types.ADD_RESOURCE,
@@ -84,14 +126,26 @@ describe('Resources Reducer', () => {
         endpoint: 'bar',
       },
       payload: {
-        data: 'baz',
+        title: 'baz',
       },
     })).to.deep.equal({
       foo: {
-        data: 'bar',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'bar',
+        },
       },
       bar: {
-        data: 'baz',
+        meta: {
+          loading: false,
+          error: false,
+        },
+        data: {
+          title: 'baz',
+        },
       },
     });
   });
