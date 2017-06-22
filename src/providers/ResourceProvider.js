@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ParseEndpoint from '../ParseEndpoint';
@@ -48,10 +47,6 @@ export class ResourceProvider extends React.Component {
 
   render() {
     const { resource, render } = this.props;
-
-    if (resource.meta.error) {
-      return <Redirect to="/404" />;
-    }
 
     return render(resource.data, resource.meta);
   }

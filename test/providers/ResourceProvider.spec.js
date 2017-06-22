@@ -2,7 +2,6 @@
 /* eslint-env mocha */
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -10,20 +9,6 @@ import sinon from 'sinon';
 import { ResourceProvider, mapStateToProps, mapDispatchToProps } from '../../src/providers/ResourceProvider';
 
 describe('ResourceProvider', () => {
-  it('Should redirect to the 404 page if an endpoint does not return an resource', () => {
-    const fetchFunc = sinon.spy();
-    const wrapper = shallow(
-      <ResourceProvider
-        getResource={fetchFunc}
-        resourceUrl="/foo"
-        resource={{ meta: { error: true } }}
-        render={() => (<div><h1>loaded</h1></div>)}
-      />,
-    );
-    expect(wrapper.find(Redirect)).to.have.length(1);
-    expect(wrapper.find(Redirect).props().to).to.equal('/404');
-  });
-
   it('should refresh the component when resourceUrl change', () => {
     const fetchFunc = sinon.spy();
 
