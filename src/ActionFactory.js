@@ -5,10 +5,11 @@ import * as types from './constants/ActionTypes';
  * Fetch a singular endpoint from an api and dispatches actions depending on
  * the result.
  *
- * @param successAction {string} The action to dispatch if a resource comes back
- * successfully.
+ * @param successAction {string} The action to dispatch if a resource comes
+ * back successfully.
  *
- * @return {function} Callback accepting an endpoint and dispatching the actions
+ * @return {function} Callback accepting an endpoint and dispatching the
+ * actions
  */
 export default successAction => endpoint => (dispatch, getState) => {
   if (typeof getState().horsemanResources[endpoint] !== 'undefined') {
@@ -22,7 +23,18 @@ export default successAction => endpoint => (dispatch, getState) => {
     (response) => {
       if (response.ok) {
         return response.json()
-          .then(payload => dispatch({ type: successAction, meta: { endpoint }, payload }))
+          .then((payload) => {
+            // We don't want any errors thrown during the dispatch to be caught
+            // by our promise chain. So run the try/catch here.
+            try {
+              dispatch({ type: successAction, meta: { endpoint }, payload });
+            } catch (e) {
+              if (process.env.NODE_ENV !== 'production') {
+                // eslint-disable-next-line no-console
+                console.warn(e);
+              }
+            }
+          })
           .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
       return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint } });

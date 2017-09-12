@@ -94,7 +94,7 @@ import { ResourceProvider } from 'horseman-core';
 
 <Route
   exact path="/resources/:slug"
-  render={({ match }) =>
+  render={({ match }) => (
     <ResourceProvider
       endpoint="http://example.com/resources/:slug.json"
       endpointVars={match.params}
@@ -102,7 +102,7 @@ import { ResourceProvider } from 'horseman-core';
         <MyEntry resource={resource} />
       )}
     />
-  }
+  )}
 />
 ```
 
@@ -121,7 +121,7 @@ In addition, we assume that you have set up the [`redux-thunk`][thunk]
 middleware.
 
 ## Simple Example with react-router
-```
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
@@ -146,7 +146,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <Route path="foo" render={({match}) => {
+        <Route path="foo" render={({match}) => (
           <ResourceProvider
             endpoint="http://example.com/resources/:slug.json"
             endpointVars={match.params}
@@ -154,7 +154,7 @@ ReactDOM.render(
               <MyEntry resource={resource} />
             )}
           />
-        }}/>
+        )}/>
       </Route>
     </Router>
   </Provider>,
