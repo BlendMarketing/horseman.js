@@ -27,7 +27,11 @@ export default successAction => endpoint => (dispatch, getState) => {
             // We don't want any errors thrown during the dispatch to be caught
             // by our promise chain. So run the try/catch here.
             try {
-              dispatch({ type: successAction, meta: { endpoint }, payload });
+              dispatch({
+                type: successAction,
+                meta: { endpoint, status: response.status },
+                payload,
+              });
             } catch (e) {
               if (process.env.NODE_ENV !== 'production') {
                 // eslint-disable-next-line no-console
@@ -37,7 +41,7 @@ export default successAction => endpoint => (dispatch, getState) => {
           })
           .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
-      return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint } });
+      return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint, status: response.status } });
     },
   )
   .catch(() => dispatch({ type: types.BAD_REQUEST, meta: { endpoint } }));

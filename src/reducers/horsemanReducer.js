@@ -24,6 +24,7 @@ export default function resources(state = initialState, action) {
           meta: {
             loading: false,
             error: false,
+            status: action.meta.status,
           },
           data: action.payload,
         },
@@ -37,6 +38,7 @@ export default function resources(state = initialState, action) {
           meta: {
             loading: false,
             error: true,
+            status: action.meta.status,
           },
           data: {},
         },
