@@ -18,7 +18,7 @@ export default successAction => endpoint => (dispatch, getState) => {
 
   dispatch({ type: types.RESOURCE_REQUEST, meta: { endpoint } });
 
-  return fetch(endpoint)
+  return fetch(new Request(endpoint, { redirect: 'manual' }))
   .then(
     (response) => {
       if (response.ok) {
@@ -29,7 +29,8 @@ export default successAction => endpoint => (dispatch, getState) => {
             try {
               dispatch({
                 type: successAction,
-                meta: { endpoint, status: response.status },
+                meta: { endpoint },
+                response,
                 payload,
               });
             } catch (e) {
@@ -41,7 +42,7 @@ export default successAction => endpoint => (dispatch, getState) => {
           })
           .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
-      return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint, status: response.status } });
+      return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint }, payload: response });
     },
   )
   .catch(() => dispatch({ type: types.BAD_REQUEST, meta: { endpoint } }));
