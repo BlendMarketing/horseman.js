@@ -1,10 +1,20 @@
+/* eslint-disable */
 import React from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import * as types from "../constants/ActionTypes";
 import ActionFactory from "../ActionFactory";
-import LoadUri from "../LoadUri";
+import getRoutePreloadData from "../getRoutePreloadData";
+
+/**
+ * The component needs to be able to fetch the resource we want.
+ */
+export const mapDispatchToProps = dispatch => ({
+  preload: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
+});
+
+const mapStateToProps = () => {};
 
 export default function (Component, routes) {
   class PrefetchLink extends React.Component {
@@ -14,8 +24,10 @@ export default function (Component, routes) {
 
     preloadLink() {
       const { preload, to } = this.props;
-      const endpoint = LoadUri(routes, to);
-      preload(endpoint);
+      const endpoint = getRoutePreloadData(routes, to);
+      if (endpoint) {
+        preload(endpoint);
+      }
     }
 
     render() {
@@ -33,14 +45,7 @@ export default function (Component, routes) {
      */
     preload: PropTypes.func.isRequired,
   };
-  /**
-   * The component needs to be able to fetch the resource we want.
-   */
-  const mapDispatchToProps = dispatch => ({
-    preload: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
-  });
-
-  const mapStateToProps = () => {};
 
   return connect(mapStateToProps, mapDispatchToProps)(PrefetchLink);
+
 }
