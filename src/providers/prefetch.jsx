@@ -14,7 +14,7 @@ export const mapDispatchToProps = dispatch => ({
   preload: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
 });
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
 
 export default function (Component, routes) {
   class PrefetchLink extends React.Component {
