@@ -3,3 +3,5 @@ export const ADD_RESOURCE = '@@horseman/ADD_RESOURCE';
 export const RESOURCE_FAIL = '@@horseman/FETCH_RESOURCE_FAIL';
 export const BAD_JSON = '@@horseman/BAD_JSON';
 export const BAD_REQUEST = '@@horseman/BAD_REQUEST';
+
+export const SAVE_ROUTES = '@@horseman/SAVE_ROUTES';
