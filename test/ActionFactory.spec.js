@@ -3,7 +3,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
-import MockFetch from 'mock-fetch-api';
+import fetchMock from 'fetch-mock';
 
 import ActionFactory from '../src/ActionFactory';
 
@@ -11,6 +11,7 @@ import * as types from '../src/constants/ActionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
 
 describe('ActionFactory', () => {
   it('should return a valid resource action with success name', (done) => {
@@ -31,18 +32,13 @@ describe('ActionFactory', () => {
         payload: {
           hello: 'world',
         },
-        response: {
-          bar: 'foo',
-        },
       },
     ];
 
-    MockFetch.when('GET', '/endpoint').respondWith(200, JSON.stringify({ hello: 'world' }));
+    fetchMock.mock('end:/endpoint', { hello: 'world' });
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/endpoint')).then(() => {
       try {
-        console.log("actions", actions);
-        console.log("get actions", store.getActions());
         expect(actions).to.deep.equal(store.getActions());
         done(); // success: call done with no parameter to indicate that it() is done()
       } catch (e) {
@@ -66,13 +62,11 @@ describe('ActionFactory', () => {
           endpoint: '/bad',
           status: 404,
         },
-        response: {
-          bar: 'foo',
-        },
+        payload: {},
       },
     ];
 
-    MockFetch.when('GET', '/bad').respondWith(404);
+    fetchMock.mock('end:/bad', 404);
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/bad')).then(() => {
       try {
@@ -101,38 +95,10 @@ describe('ActionFactory', () => {
       },
     ];
 
-    MockFetch.when('GET', '/badjson').respondWith(200, 'not json');
+    // MockFetch.when('GET', '/badjson').respondWith(200, 'not json');
+    fetchMock.mock('end:/badjson', 'not json');
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/badjson')).then(() => {
-      try {
-        expect(actions).to.deep.equal(store.getActions());
-        done(); // success: call done with no parameter to indicate that it() is done()
-      } catch (e) {
-        done(e); // failure: call done with an error Object to indicate that it() failed
-      }
-    });
-  });
-
-  it('should dispatch BAD_REQUEST action when endpoint is bad.', (done) => {
-    const store = mockStore({ horsemanResources: {} });
-    const actions = [
-      {
-        type: types.RESOURCE_REQUEST,
-        meta: {
-          endpoint: '/badrequest',
-        },
-      },
-      {
-        type: types.BAD_REQUEST,
-        meta: {
-          endpoint: '/badrequest',
-        },
-      },
-    ];
-
-    MockFetch.failNextCall();
-
-    store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/badrequest')).then(() => {
       try {
         expect(actions).to.deep.equal(store.getActions());
         done(); // success: call done with no parameter to indicate that it() is done()

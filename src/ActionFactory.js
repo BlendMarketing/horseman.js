@@ -21,9 +21,7 @@ export default successAction => endpoint => (dispatch, getState) => {
   return fetch(new Request(endpoint, { redirect: 'manual' }))
   .then(
     (response) => {
-      console.log("status",response.status);
-      if (response.status === "200") {
-        console.log("success");
+      if (response.status === 200) {
         return response.json()
           .then((payload) => {
             // We don't want any errors thrown during the dispatch to be caught
@@ -31,8 +29,7 @@ export default successAction => endpoint => (dispatch, getState) => {
             try {
               dispatch({
                 type: successAction,
-                meta: { endpoint },
-                response,
+                meta: { endpoint, status: response.status },
                 payload,
               });
             } catch (e) {
@@ -44,8 +41,17 @@ export default successAction => endpoint => (dispatch, getState) => {
           })
           .catch(() => dispatch({ type: types.BAD_JSON, meta: { endpoint } }));
       }
-      return dispatch({ type: types.RESOURCE_FAIL, meta: { endpoint }, payload: response });
+      return response.json().then(
+        payload => dispatch({
+          type: types.RESOURCE_FAIL,
+          meta: { endpoint, status: response.status },
+          payload,
+        })).catch(
+        () => dispatch({
+          type: types.RESOURCE_FAIL,
+          meta: { endpoint, status: response.status },
+          payload: {},
+        }));
     },
-  )
-  .catch(() => dispatch({ type: types.BAD_REQUEST, meta: { endpoint } }));
+  );
 };
