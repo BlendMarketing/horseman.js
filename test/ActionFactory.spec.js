@@ -26,9 +26,13 @@ describe('ActionFactory', () => {
         type: '@@horseman/ADD_RESOURCE',
         meta: {
           endpoint: '/endpoint',
+          status: 200,
         },
         payload: {
           hello: 'world',
+        },
+        response: {
+          bar: 'foo',
         },
       },
     ];
@@ -58,6 +62,10 @@ describe('ActionFactory', () => {
         type: types.RESOURCE_FAIL,
         meta: {
           endpoint: '/bad',
+          status: 404,
+        },
+        response: {
+          bar: 'foo',
         },
       },
     ];
