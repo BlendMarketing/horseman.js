@@ -21,7 +21,9 @@ export default successAction => endpoint => (dispatch, getState) => {
   return fetch(new Request(endpoint, { redirect: 'manual' }))
   .then(
     (response) => {
-      if (response.ok) {
+      console.log("status",response.status);
+      if (response.status === "200") {
+        console.log("success");
         return response.json()
           .then((payload) => {
             // We don't want any errors thrown during the dispatch to be caught

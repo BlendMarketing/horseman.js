@@ -132,6 +132,7 @@ describe('Resources Reducer', () => {
       type: types.ADD_RESOURCE,
       meta: {
         endpoint: 'bar',
+        status: 200,
       },
       payload: {
         title: 'baz',

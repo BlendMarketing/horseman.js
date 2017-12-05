@@ -41,6 +41,8 @@ describe('ActionFactory', () => {
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/endpoint')).then(() => {
       try {
+        console.log("actions", actions);
+        console.log("get actions", store.getActions());
         expect(actions).to.deep.equal(store.getActions());
         done(); // success: call done with no parameter to indicate that it() is done()
       } catch (e) {
