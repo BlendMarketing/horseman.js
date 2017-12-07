@@ -24,8 +24,10 @@ export default function resources(state = initialState, action) {
           meta: {
             loading: false,
             error: false,
+            status: action.meta.status,
           },
           data: action.payload,
+          response: action.response,
         },
       };
     }
@@ -37,8 +39,10 @@ export default function resources(state = initialState, action) {
           meta: {
             loading: false,
             error: true,
+            status: action.meta.status,
           },
           data: {},
+          response: action.response,
         },
       };
     }

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import fetchMock from 'fetch-mock';
 
 import prefetch from "../../src/providers/prefetch";
 import * as types from '../../src/constants/ActionTypes';
@@ -28,6 +29,7 @@ const Link = prefetch(() => <a />, routes);
 describe("prefetch provider", () => {
 
   it("should fire a FETCH_RESOURCE_REQUEST on mount", () => {
+    fetchMock.mock('end:matchedUrl',{ hello: "world" });
     store.clearActions();
     const wrapper = mount(
       <Provider store={store}>

@@ -88,6 +88,10 @@ describe('Resources Reducer', () => {
       type: types.RESOURCE_FAIL,
       meta: {
         endpoint: 'bar',
+        status: 404,
+      },
+      response: {
+        status: 404,
       },
     })).to.deep.equal({
       foo: {
@@ -103,8 +107,12 @@ describe('Resources Reducer', () => {
         meta: {
           loading: false,
           error: true,
+          status: 404,
         },
         data: {},
+        response: {
+          status: 404,
+        },
       },
     });
   });
@@ -124,9 +132,13 @@ describe('Resources Reducer', () => {
       type: types.ADD_RESOURCE,
       meta: {
         endpoint: 'bar',
+        status: 200,
       },
       payload: {
         title: 'baz',
+      },
+      response: {
+        status: 200,
       },
     })).to.deep.equal({
       foo: {
@@ -142,9 +154,13 @@ describe('Resources Reducer', () => {
         meta: {
           loading: false,
           error: false,
+          status: 200,
         },
         data: {
           title: 'baz',
+        },
+        response: {
+          status: 200,
         },
       },
     });
