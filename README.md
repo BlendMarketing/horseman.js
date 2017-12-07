@@ -127,7 +127,7 @@ import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { Router, Route, browserHistory } from 'react-router'
-import { Reducers as horsemanReducers } from 'horseman-core'
+import { horsemanReducers } from 'horseman-core'
 
 import reducers from '<project-path>/reducers'
 
