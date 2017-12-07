@@ -14,9 +14,11 @@ export const mapDispatchToProps = dispatch => ({
   preload: uri => dispatch(ActionFactory(types.ADD_RESOURCE)(uri)),
 });
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  routes: state.horsemanRoutes,
+});
 
-export default function (Component, routes) {
+export default function (Component) {
   class PrefetchLink extends React.Component {
     componentWillMount() {
       this.preloadLink();
@@ -24,7 +26,7 @@ export default function (Component, routes) {
 
     preloadLink() {
       const { preload, to } = this.props;
-      const endpoint = getRoutePreloadData(routes, to);
+      const endpoint = getRoutePreloadData(this.props.routes, to);
       if (endpoint) {
         preload(endpoint);
       }
