@@ -7,7 +7,8 @@ var webpackConfig = require('./webpack.config.js');
 module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'polyfill'],
+    polyfill: ['Promise', 'fetch'],
     files: [
       'test/**/*.spec.js',
       {pattern: './src/**/*.js', watched: true, included: false}
