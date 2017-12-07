@@ -15,7 +15,7 @@ export const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  horsemanRoutes: state.horsemanRouteReducer,
+  routes: state.horsemanRouteReducer,
 });
 
 export default function (Component) {
