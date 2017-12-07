@@ -12,7 +12,15 @@ import * as types from '../../src/constants/ActionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-const store = mockStore({ horsemanResources: {} });
+const store = mockStore({ horsemanResources:{},horsemanRoutes: [
+  {
+    props:{
+      path:"/foo",
+      exact:true,
+      data:"matchedUrl"
+    }
+  }
+]});
 
 const routes = [
   {

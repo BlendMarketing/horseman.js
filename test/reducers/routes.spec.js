@@ -26,10 +26,8 @@ describe('Routes Reducer', () => {
       routes: [{
         path: 'foo',
       }],
-    })).to.deep.equal({
-      routes: [{
-        path: 'foo',
-      }],
-    });
+    })).to.deep.equal([{
+      path: 'foo',
+    }]);
   });
 });

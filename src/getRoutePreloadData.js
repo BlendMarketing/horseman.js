@@ -1,7 +1,7 @@
 import { matchPath } from 'react-router-dom';
 import ParseEndpoint from './ParseEndpoint';
 
-const getRoutePreloadData = (routes, path) => {
+const getRoutePreloadData = (routes = [], path) => {
   let data = '';
   routes.forEach((route) => {
     const routeInfo = { path: route.props.path, exact: route.props.exact };
