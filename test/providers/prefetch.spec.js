@@ -42,7 +42,6 @@ describe("prefetch provider", () => {
         endpoint: 'matchedUrl',
       },
     };
-    console.log(store.getActions()[0]);
     expect(action).to.deep.equal(store.getActions()[0]);
   });
 
