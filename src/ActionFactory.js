@@ -21,6 +21,7 @@ export default successAction => endpoint => (dispatch, getState) => {
   return fetch(new Request(endpoint, { redirect: 'manual' }))
   .then(
     (response) => {
+      const headers = response.headers.map;
       if (response.status === 200) {
         return response.json()
           .then((payload) => {
@@ -29,7 +30,7 @@ export default successAction => endpoint => (dispatch, getState) => {
             try {
               dispatch({
                 type: successAction,
-                meta: { endpoint, status: response.status },
+                meta: { endpoint, status: response.status, headers },
                 payload,
               });
             } catch (e) {
@@ -44,12 +45,12 @@ export default successAction => endpoint => (dispatch, getState) => {
       return response.json().then(
         payload => dispatch({
           type: types.RESOURCE_FAIL,
-          meta: { endpoint, status: response.status },
+          meta: { endpoint, status: response.status, headers },
           payload,
         })).catch(
         () => dispatch({
           type: types.RESOURCE_FAIL,
-          meta: { endpoint, status: response.status },
+          meta: { endpoint, status: response.status, headers },
           payload: {},
         }));
     },
