@@ -89,6 +89,7 @@ describe('Resources Reducer', () => {
       meta: {
         endpoint: 'bar',
         status: 404,
+        headers: "foo",
       },
       response: {
         status: 404,
@@ -108,6 +109,7 @@ describe('Resources Reducer', () => {
           loading: false,
           error: true,
           status: 404,
+          headers: "foo",
         },
         data: {},
         response: {
@@ -133,6 +135,7 @@ describe('Resources Reducer', () => {
       meta: {
         endpoint: 'bar',
         status: 200,
+        headers: 'foo',
       },
       payload: {
         title: 'baz',
@@ -155,6 +158,7 @@ describe('Resources Reducer', () => {
           loading: false,
           error: false,
           status: 200,
+          headers: 'foo',
         },
         data: {
           title: 'baz',

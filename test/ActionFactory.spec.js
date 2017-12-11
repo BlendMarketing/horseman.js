@@ -28,6 +28,10 @@ describe('ActionFactory', () => {
         meta: {
           endpoint: '/endpoint',
           status: 200,
+          headers: {
+            foo: 'bar',
+            'content-type': 'text/plain;charset=UTF-8',
+          },
         },
         payload: {
           hello: 'world',
@@ -35,7 +39,7 @@ describe('ActionFactory', () => {
       },
     ];
 
-    fetchMock.mock('end:/endpoint', { hello: 'world' });
+    fetchMock.mock('end:/endpoint', { headers: { foo: 'bar' }, body: { hello: 'world' } });
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/endpoint')).then(() => {
       try {
@@ -61,12 +65,15 @@ describe('ActionFactory', () => {
         meta: {
           endpoint: '/bad',
           status: 404,
+          headers: {
+            foo: 'bar',
+          },
         },
         payload: {},
       },
     ];
 
-    fetchMock.mock('end:/bad', 404);
+    fetchMock.mock('end:/bad', { status: 404, headers: { foo: 'bar' } });
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/bad')).then(() => {
       try {
