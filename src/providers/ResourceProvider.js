@@ -48,7 +48,7 @@ export class ResourceProvider extends React.Component {
   render() {
     const { resource, render } = this.props;
 
-    return render(resource.data, resource.meta);
+    return render(resource.data, resource.meta, resource.response);
   }
 }
 
