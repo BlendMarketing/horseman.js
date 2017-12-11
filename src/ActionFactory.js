@@ -31,6 +31,7 @@ export default successAction => endpoint => (dispatch, getState) => {
                 type: successAction,
                 meta: { endpoint, status: response.status },
                 payload,
+                response,
               });
             } catch (e) {
               if (process.env.NODE_ENV !== 'production') {
@@ -46,11 +47,13 @@ export default successAction => endpoint => (dispatch, getState) => {
           type: types.RESOURCE_FAIL,
           meta: { endpoint, status: response.status },
           payload,
+          response,
         })).catch(
         () => dispatch({
           type: types.RESOURCE_FAIL,
           meta: { endpoint, status: response.status },
           payload: {},
+          response,
         }));
     },
   );
