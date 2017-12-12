@@ -2,6 +2,7 @@
  * @module horseman.js
  */
 import { ConnectedResourceProvider as ResourceProvider } from './providers/ResourceProvider';
+import { ConnectedPaginationProvider as PaginationProvider } from './providers/PaginationProvider';
 import prefetch from './providers/prefetch';
 import horsemanReducer from './reducers/horsemanReducer';
 import horsemanRouteReducer from './reducers/horsemanRouteReducer';
@@ -17,4 +18,5 @@ export {
   horsemanReducers,
   prefetch,
   ResourceProvider,
+  PaginationProvider,
 };

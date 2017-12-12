@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as types from '../constants/ActionTypes';
 
-import ResourceProvider from './ResourceProvider';
+import { ConnectedResourceProvider as ResourceProvider } from './ResourceProvider';
 
 export class PaginationProvider extends React.Component {
 
@@ -29,7 +29,7 @@ export class PaginationProvider extends React.Component {
     } = this.props;
 
     // Set Page total once response becomes available
-    if (resource.ready) {
+    if (resource.loading === false ) {
       const newPageTotal = totalPagesResolver(resource.response);
       if (newPageTotal !== totalPages) {
         setPageTotal(newPageTotal);
@@ -39,7 +39,7 @@ export class PaginationProvider extends React.Component {
     return (
       <ResourceProvider
         endpoint={resourceUrl}
-        render={render}
+        render={(resource, meta)=> render(resource, meta)}
       />
     );
   }
@@ -52,7 +52,7 @@ PaginationProvider.propTypes = {
    * The key for storing data in redux. Will be used for saving and fetching
    * data.
    */
-  key: PropTypes.string.isRequired,
+  handle: PropTypes.string.isRequired,
 
   /**
    * The function for determining the url, based on the current URL
@@ -107,14 +107,16 @@ PaginationProvider.propTypes = {
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  const currentPage = state.horsemanPagination[ownProps.key].currentPage || ownProps.defaultPage;
+  console.log("ownProps",ownProps);
+  console.log("state",state);
+  const currentPage = state.horsemanPaginations[ownProps.handle] && state.horsemanPaginations[ownProps.handle].currentPage ?  state.horsemanPaginations[ownProps.handle].currentPage : ownProps.defaultPage;
   const resourceUrl = ownProps.resolve(currentPage);
 
   return {
     currentPage,
-    totalPages: state.horsemanPagination[ownProps.key].totalPages || null,
+    totalPages: state.horsemanPaginations[ownProps.handle] && state.horsemanPaginations[ownProps.handle].totalPages ? state.horsemanPaginations[ownProps.handle].totalPages : null,
     resourceUrl,
-    ...state.horsemanPaginations[ownProps.key],
+    ...state.horsemanPaginations[ownProps.handle],
     resource: state.horsemanResources[resourceUrl] ||
       { meta: { loading: true, error: false }, data: {} },
   };
@@ -126,17 +128,17 @@ export const mapStateToProps = (state, ownProps) => {
 export const mapDispatchToProps = (dispatch, ownProps) => ({
   setPageTotal: pageTotal => dispatch({
     data: { pageTotal },
-    key: ownProps.key,
+    handle: ownProps.handle,
     type: types.SET_PAGE_TOTAL,
   }),
   setCurrentPage: currentPage => dispatch({
     data: { currentPage },
-    key: ownProps.key,
+    handle: ownProps.handle,
     type: types.SET_CURRENT_PAGE,
   }),
 });
 
-export const ConnectedResourceProvider = connect(
+export const ConnectedPaginationProvider = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ResourceProvider);
+)(PaginationProvider);
