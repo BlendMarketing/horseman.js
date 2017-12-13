@@ -39,7 +39,9 @@ export class PaginationProvider extends React.Component {
     return (
       <ResourceProvider
         endpoint={resourceUrl}
-        render={(resource, meta)=> render(resource, meta)}
+        render={ (renderResource, renderMeta) => (
+          render(renderResource, renderMeta)
+        )}
       />
     );
   }
