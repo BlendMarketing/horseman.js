@@ -1,10 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 
-/* eslint-disable */
-import React from "react";
-import PropTypes from "prop-types";
-
-import { connect } from "react-redux";
-import * as types from "../constants/ActionTypes";
+import { connect } from 'react-redux';
+import * as types from '../constants/ActionTypes';
 
 /**
  * The component needs to be able to fetch the resource we want.
@@ -29,8 +27,7 @@ export const mapStateToProps = (state, ownProps) => {
 };
 
 export default function (Component) {
-
-  const PaginatedComponent = ( props ) => <Component {...props} />;
+  const PaginatedComponent = props => <Component {...props} />;
 
   PaginatedComponent.propTypes = {
     /*
@@ -52,5 +49,4 @@ export default function (Component) {
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(PaginatedComponent);
-
 }
