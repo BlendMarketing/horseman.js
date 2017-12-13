@@ -27,7 +27,7 @@ describe('horseman.js index', () => {
       expect(horseman.prefetch).to.deep.equal(prefetch);
     });
     it('the Correct Number of items', () => {
-      expect(Object.keys(horseman)).to.have.lengthOf(4);
+      expect(Object.keys(horseman)).to.have.lengthOf(5);
     });
   });
 });
