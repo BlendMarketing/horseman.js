@@ -6,6 +6,8 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import * as types from '../../src/constants/ActionTypes';
+
 import { PaginationProvider, mapStateToProps, mapDispatchToProps } from '../../src/providers/PaginationProvider';
 import { ConnectedResourceProvider } from '../../src/providers/ResourceProvider';
 
@@ -88,9 +90,24 @@ describe('PaginationProvider', () => {
 
     setPageTotal(10);
 
+    const pageTotalProps = {
+      data: { totalPages: 10 },
+      handle: ownProps.handle,
+      type: types.SET_PAGE_TOTAL,
+    };
+
+    expect(dispatch.calledWith(pageTotalProps)).to.equal(true);
+
     expect(dispatch.calledOnce).to.equal(true);
 
-    setCurrentPage(11);
+    setCurrentPage(2);
+    const currentPageProps = {
+      data: { currentPage: 2 },
+      handle: ownProps.handle,
+      type: types.SET_CURRENT_PAGE,
+    };
+
+    expect(dispatch.calledWith(currentPageProps)).to.equal(true);
 
     expect(dispatch.calledTwice).to.equal(true);
     expect(rest).to.deep.equal(otherPropsExpected);

@@ -133,8 +133,8 @@ export const mapStateToProps = (state, ownProps) => {
  * The component needs to be able to fetch the resource we want.
  */
 export const mapDispatchToProps = (dispatch, ownProps) => ({
-  setPageTotal: pageTotal => dispatch({
-    data: { pageTotal },
+  setPageTotal: totalPages => dispatch({
+    data: { totalPages },
     handle: ownProps.handle,
     type: types.SET_PAGE_TOTAL,
   }),
