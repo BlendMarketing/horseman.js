@@ -27,16 +27,18 @@ export class PaginationProvider extends React.Component {
       resource,
       totalPages,
       totalPagesResolver,
+      loading,
     } = this.props;
 
     // Set Page total once response becomes available
-    if (resource.meta.loading === false) {
-      const newPageTotal = totalPagesResolver(resource.response);
-      if (newPageTotal !== totalPages) {
-        setPageTotal(newPageTotal);
-      }
+    if (resource.meta.loading) {
+      return loading();
     }
 
+    const newPageTotal = totalPagesResolver(resource.response);
+    if (newPageTotal !== totalPages) {
+      setPageTotal(newPageTotal);
+    }
     return (
       <ResourceProvider
         endpoint={resourceUrl}
@@ -104,6 +106,11 @@ PaginationProvider.propTypes = {
    * The actual resource object. To be used for rendering the page.
    */
   resource: PropTypes.object.isRequired,
+
+  /**
+   * Func to be rendered while resource is loading
+   */
+  loading: PropTypes.func.isRequired,
 
   /**
    * Func to be rendered once the resource comes back
