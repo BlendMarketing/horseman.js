@@ -10,24 +10,23 @@ import { PaginationProvider, mapStateToProps, mapDispatchToProps } from '../../s
 import { ConnectedResourceProvider } from '../../src/providers/ResourceProvider';
 
 describe('PaginationProvider', () => {
-  it('should return 1 resource provider', () => {
-    const ResourceComponent = ({ e }) => (
-      <div>{ e.foo } { e.hello }</div>
-    );
+  it('should return 1 resource provider and update total pages', () => {
+    const totalPageFunc = sinon.spy();
     const props = {
       resolve: page => page,
-      resource: { meta: { loading: true }, data: {} },
+      resource: { meta: { loading: false }, data: {} },
       handle: 'foo',
-      defaultPage: 1,
       setCurrentPage: () => 1,
-      totalPagesResolver: () => 10,
-      render: e => <ResourceComponent e={e} />,
+      totalPagesResolver: totalPageFunc,
+      render: e => e,
     };
     const wrapper = shallow(
       <PaginationProvider {...props} />,
     );
+    expect(totalPageFunc.calledOnce).to.equal(true);
     expect(wrapper.find(ConnectedResourceProvider)).to.have.length(1);
   });
+
 
   describe('Should mapStateToProps appropriately', () => {
     it('with empty state', () => {

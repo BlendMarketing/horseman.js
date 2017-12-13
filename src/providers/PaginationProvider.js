@@ -29,7 +29,7 @@ export class PaginationProvider extends React.Component {
     } = this.props;
 
     // Set Page total once response becomes available
-    if (resource.loading === false) {
+    if (resource.meta.loading === false) {
       const newPageTotal = totalPagesResolver(resource.response);
       if (newPageTotal !== totalPages) {
         setPageTotal(newPageTotal);
@@ -48,6 +48,9 @@ export class PaginationProvider extends React.Component {
 
 }
 
+PaginationProvider.defaultProps = {
+  defaultPage: 1,
+};
 
 PaginationProvider.propTypes = {
   /**
