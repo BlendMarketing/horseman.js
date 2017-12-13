@@ -29,7 +29,7 @@ export class PaginationProvider extends React.Component {
     } = this.props;
 
     // Set Page total once response becomes available
-    if (resource.loading === false ) {
+    if (resource.loading === false) {
       const newPageTotal = totalPagesResolver(resource.response);
       if (newPageTotal !== totalPages) {
         setPageTotal(newPageTotal);
@@ -39,7 +39,7 @@ export class PaginationProvider extends React.Component {
     return (
       <ResourceProvider
         endpoint={resourceUrl}
-        render={ (renderResource, renderMeta) => (
+        render={(renderResource, renderMeta) => (
           render(renderResource, renderMeta)
         )}
       />
@@ -74,12 +74,12 @@ PaginationProvider.propTypes = {
   /**
    * Current Page Number
    */
-  currentPage: PropTypes.string,
+  currentPage: PropTypes.number,
 
   /**
    * The default page number to load
    */
-  defaultPage: PropTypes.string,
+  defaultPage: PropTypes.number,
 
   /**
    * The method for determining total pages from response
@@ -109,16 +109,16 @@ PaginationProvider.propTypes = {
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  console.log("ownProps",ownProps);
-  console.log("state",state);
-  const currentPage = state.horsemanPaginations[ownProps.handle] && state.horsemanPaginations[ownProps.handle].currentPage ?  state.horsemanPaginations[ownProps.handle].currentPage : ownProps.defaultPage;
+  const pageData = state.horsemanPaginations[ownProps.handle]
+    && state.horsemanPaginations[ownProps.handle];
+  const currentPage = pageData.currentPage ?
+    pageData.currentPage : ownProps.defaultPage;
   const resourceUrl = ownProps.resolve(currentPage);
 
   return {
     currentPage,
-    totalPages: state.horsemanPaginations[ownProps.handle] && state.horsemanPaginations[ownProps.handle].totalPages ? state.horsemanPaginations[ownProps.handle].totalPages : null,
+    totalPages: pageData.totalPages && pageData.totalPages,
     resourceUrl,
-    ...state.horsemanPaginations[ownProps.handle],
     resource: state.horsemanResources[resourceUrl] ||
       { meta: { loading: true, error: false }, data: {} },
   };
