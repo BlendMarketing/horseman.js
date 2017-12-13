@@ -47,4 +47,23 @@ describe('Pagination Reducer', () => {
       },
     });
   });
+  it('should combine data from multiple calls', () => {
+    const hydratedState = {
+      blog: {
+        totalPages: 10,
+      },
+    };
+    expect(horsemanPaginationReducer( hydratedState, {
+      type: types.SET_CURRENT_PAGE,
+      handle: 'blog',
+      data: {
+        currentPage: 1,
+      },
+    })).to.deep.equal({
+      blog: {
+        totalPages: 10,
+        currentPage: 1,
+      },
+    });
+  });
 });
