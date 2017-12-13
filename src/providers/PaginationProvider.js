@@ -109,8 +109,8 @@ PaginationProvider.propTypes = {
 };
 
 export const mapStateToProps = (state, ownProps) => {
-  const pageData = state.horsemanPaginations[ownProps.handle]
-    && state.horsemanPaginations[ownProps.handle];
+  const pageData = state.horsemanPaginations && state.horsemanPaginations[ownProps.handle]
+    ? state.horsemanPaginations[ownProps.handle] : {};
   const currentPage = pageData.currentPage ?
     pageData.currentPage : ownProps.defaultPage;
   const resourceUrl = ownProps.resolve(currentPage);
@@ -119,7 +119,8 @@ export const mapStateToProps = (state, ownProps) => {
     currentPage,
     totalPages: pageData.totalPages && pageData.totalPages,
     resourceUrl,
-    resource: state.horsemanResources[resourceUrl] ||
+    resource: state.horsemanResources && state.horsemanResources[resourceUrl] ?
+      state.horsemanResources[resourceUrl] :
       { meta: { loading: true, error: false }, data: {} },
   };
 };

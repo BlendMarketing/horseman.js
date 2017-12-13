@@ -5,6 +5,7 @@ import * as horseman from '../src/index';
 
 import prefetch from '../src/providers/prefetch';
 import { ConnectedResourceProvider } from '../src/providers/ResourceProvider';
+import { ConnectedPaginationProvider } from '../src/providers/PaginationProvider';
 import horsemanReducer from '../src/reducers/horsemanReducer';
 import horsemanRouteReducer from '../src/reducers/horsemanRouteReducer';
 
@@ -16,6 +17,9 @@ describe('horseman.js index', () => {
       expect(horseman.horsemanReducers.horsemanRoutes).to.be.a('function')
       .and.deep.equal(horsemanRouteReducer);
     });
+    it('the PaginationProvider', () => {
+      expect(horseman.PaginationProvider).to.deep.equal(ConnectedPaginationProvider);
+    });
     it('the ResourceProvider', () => {
       expect(horseman.ResourceProvider).to.deep.equal(ConnectedResourceProvider);
     });
@@ -23,7 +27,7 @@ describe('horseman.js index', () => {
       expect(horseman.prefetch).to.deep.equal(prefetch);
     });
     it('the Correct Number of items', () => {
-      expect(Object.keys(horseman)).to.have.lengthOf(3);
+      expect(Object.keys(horseman)).to.have.lengthOf(4);
     });
   });
 });
