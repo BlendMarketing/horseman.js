@@ -12,10 +12,18 @@ import * as types from '../src/constants/ActionTypes';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+const createResponse = (responseText, status) => {
+  const blob = typeof responseText === 'object' ?
+    new Blob([JSON.stringify(responseText, null, 2)], { type: 'application/json' }) :
+    new Blob([responseText, { type: 'text/html' }]);
+  return new Response(blob, { status });
+};
+
 
 describe('ActionFactory', () => {
   it('should return a valid resource action with success name', (done) => {
     const store = mockStore({ horsemanResources: {} });
+    const response = createResponse({ hello: 'world' }, 200);
     const actions = [
       {
         type: types.RESOURCE_REQUEST,
@@ -32,10 +40,12 @@ describe('ActionFactory', () => {
         payload: {
           hello: 'world',
         },
+        response,
       },
     ];
 
-    fetchMock.mock('end:/endpoint', { hello: 'world' });
+    fetchMock.mock('end:/endpoint', response);
+
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/endpoint')).then(() => {
       try {
@@ -49,6 +59,7 @@ describe('ActionFactory', () => {
 
   it('should send a fail response when the resource is not found', (done) => {
     const store = mockStore({ horsemanResources: {} });
+    const response = createResponse('Not Found', 404);
     const actions = [
       {
         type: types.RESOURCE_REQUEST,
@@ -63,10 +74,11 @@ describe('ActionFactory', () => {
           status: 404,
         },
         payload: {},
+        response,
       },
     ];
 
-    fetchMock.mock('end:/bad', 404);
+    fetchMock.mock('end:/bad', response);
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/bad')).then(() => {
       try {
@@ -95,7 +107,6 @@ describe('ActionFactory', () => {
       },
     ];
 
-    // MockFetch.when('GET', '/badjson').respondWith(200, 'not json');
     fetchMock.mock('end:/badjson', 'not json');
 
     store.dispatch(ActionFactory('@@horseman/ADD_RESOURCE')('/badjson')).then(() => {
