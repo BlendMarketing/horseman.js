@@ -7,13 +7,19 @@ export default function paginations(state = initialState, action) {
     case types.SET_PAGE_TOTAL: {
       return {
         ...state,
-        [action.handle]: { ...action.data },
+        [action.handle]: {
+          ...state[action.handle],
+          totalPages: action.data.totalPages,
+        },
       };
     }
     case types.SET_CURRENT_PAGE: {
       return {
         ...state,
-        [action.handle]: { ...action.data },
+        [action.handle]: {
+          ...state[action.handle],
+          currentPage: action.data.currentPage,
+        },
       };
     }
     default: {
