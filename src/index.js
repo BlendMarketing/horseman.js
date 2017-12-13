@@ -4,6 +4,7 @@
 import { ConnectedResourceProvider as ResourceProvider } from './providers/ResourceProvider';
 import { ConnectedPaginationProvider as PaginationProvider } from './providers/PaginationProvider';
 import prefetch from './providers/prefetch';
+import paginator from './providers/paginator';
 import horsemanReducer from './reducers/horsemanReducer';
 import horsemanRouteReducer from './reducers/horsemanRouteReducer';
 import horsemanPaginationReducer from './reducers/horsemanPaginationReducer';
@@ -17,6 +18,7 @@ const horsemanReducers = {
 export {
   horsemanReducers,
   prefetch,
+  paginator,
   ResourceProvider,
   PaginationProvider,
 };
