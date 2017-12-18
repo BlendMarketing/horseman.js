@@ -1,6 +1,12 @@
 /**
  * @module horseman.js
  */
+import Promise from 'promise-polyfill';
+// Add Polyfill for IE11
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+
 import { ConnectedResourceProvider as ResourceProvider } from './providers/ResourceProvider';
 import { ConnectedPaginationProvider as PaginationProvider } from './providers/PaginationProvider';
 import prefetch from './providers/prefetch';

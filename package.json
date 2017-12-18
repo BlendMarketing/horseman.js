@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "fetch-everywhere": "^1.0.5",
-    "fetch-mock": "^5.13.1"
+    "fetch-mock": "^5.13.1",
+    "promise-polyfill": "^6.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
