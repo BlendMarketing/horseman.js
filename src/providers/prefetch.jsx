@@ -33,7 +33,8 @@ export default function (Component) {
     }
 
     render() {
-      return <Component {...this.props} />;
+      const { routes, preload, ...rest } = this.props;
+      return <Component {...rest} />;
     }
   }
 
