@@ -12,22 +12,6 @@ import { PaginationProvider, mapStateToProps, mapDispatchToProps } from '../../s
 import { ConnectedResourceProvider } from '../../src/providers/ResourceProvider';
 
 describe('PaginationProvider', () => {
-  it('should return loading component when loading resource', () => {
-    const Loading = () => <div>Loading</div>;
-    const props = {
-      resolve: page => page,
-      resource: { meta: { loading: true }, data: {} },
-      handle: 'foo',
-      setCurrentPage: () => 1,
-      loading: () => <Loading />,
-    };
-    const wrapper = shallow(
-      <PaginationProvider {...props} />,
-    );
-    expect(wrapper.find(Loading)).to.have.length(1);
-  });
-
-
   it('should return 1 resource provider and update total pages', () => {
     const totalPageFunc = sinon.spy();
     const props = {
