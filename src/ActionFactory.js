@@ -1,5 +1,12 @@
 import 'fetch-everywhere';
+import Promise from 'promise-polyfill';
 import * as types from './constants/ActionTypes';
+
+// Add Polyfill for IE11
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+
 
 /**
  * Fetch a singular endpoint from an api and dispatches actions depending on
