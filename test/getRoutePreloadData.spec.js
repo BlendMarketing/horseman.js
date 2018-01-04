@@ -27,6 +27,14 @@ describe('getRoutePreloadData', () => {
     },
   ];
 
+  const wildCardRoutes = [
+    {
+      props: {
+        path: '/*',
+        data: "genericUrl",
+      },
+    },
+  ];
   it('should find the correct path', () => {
     expect(getRoutePreloadData(routes, "/foo")).to.equal("matchedUrl");
   });
@@ -35,5 +43,8 @@ describe('getRoutePreloadData', () => {
   });
   it('should match routes with paths', () => {
     expect(getRoutePreloadData(routes, "/bar/test")).to.equal("matchedUrl");
+  });
+  it('should handle wildcard routes', () => {
+    expect(getRoutePreloadData(wildCardRoutes, "/generic")).to.equal("genericUrl");
   });
 });
