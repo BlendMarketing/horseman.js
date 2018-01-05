@@ -9,6 +9,7 @@ import { ConnectedResourceProvider } from '../src/providers/ResourceProvider';
 import { ConnectedPaginationProvider } from '../src/providers/PaginationProvider';
 import horsemanReducer from '../src/reducers/horsemanReducer';
 import horsemanRouteReducer from '../src/reducers/horsemanRouteReducer';
+import ActionFactory from "../src/ActionFactory";
 
 describe('horseman.js index', () => {
   describe('should export', () => {
@@ -20,6 +21,9 @@ describe('horseman.js index', () => {
     });
     it('the PaginationProvider', () => {
       expect(horseman.PaginationProvider).to.deep.equal(ConnectedPaginationProvider);
+    });
+    it('the ActionFactory', () => {
+      expect(horseman.ActionFactory).to.deep.equal(ActionFactory);
     });
     it('the ResourceProvider', () => {
       expect(horseman.ResourceProvider).to.deep.equal(ConnectedResourceProvider);

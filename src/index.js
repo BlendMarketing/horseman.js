@@ -8,6 +8,7 @@ import paginator from './providers/paginator';
 import horsemanReducer from './reducers/horsemanReducer';
 import horsemanRouteReducer from './reducers/horsemanRouteReducer';
 import horsemanPaginationReducer from './reducers/horsemanPaginationReducer';
+import ActionFactory from "./ActionFactory";
 
 const horsemanReducers = {
   horsemanResources: horsemanReducer,
@@ -16,6 +17,7 @@ const horsemanReducers = {
 };
 
 export {
+  ActionFactory,
   horsemanReducers,
   prefetch,
   paginator,
