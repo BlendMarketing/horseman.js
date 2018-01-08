@@ -9,7 +9,7 @@ import { ConnectedResourceProvider } from '../src/providers/ResourceProvider';
 import { ConnectedPaginationProvider } from '../src/providers/PaginationProvider';
 import horsemanReducer from '../src/reducers/horsemanReducer';
 import horsemanRouteReducer from '../src/reducers/horsemanRouteReducer';
-import ActionFactory from "../src/ActionFactory";
+import ActionFactory from '../src/ActionFactory';
 
 describe('horseman.js index', () => {
   describe('should export', () => {
@@ -35,7 +35,7 @@ describe('horseman.js index', () => {
       expect(horseman.paginator).to.deep.equal(paginator);
     });
     it('the Correct Number of items', () => {
-      expect(Object.keys(horseman)).to.have.lengthOf(5);
+      expect(Object.keys(horseman)).to.have.lengthOf(6);
     });
   });
 });

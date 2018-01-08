@@ -18,7 +18,9 @@ export default successAction => endpoint => (dispatch, getState) => {
 
   dispatch({ type: types.RESOURCE_REQUEST, meta: { endpoint } });
 
-  return fetch(new Request(endpoint, { redirect: 'manual' }))
+  return fetch(
+    new Request(endpoint, { redirect: 'manual' }),
+    { credentials: 'include' })
   .then(
     (response) => {
       if (response.status === 200) {
